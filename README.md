@@ -6,6 +6,8 @@
  - create agent ui that can be easily enabled/disabled
  - Setup template to make future site building more efficient
 
+**[Dataverse SDK](https://www.microsoft.com/en-us/power-platform/blog/2025/12/03/dataverse-sdk-python/)**
+
 Flask is a Python project that demonstrates how to build web applications using [Flask](https://flask.palletsprojects.com/) and [Jinja2](https://jinja.palletsprojects.com/).
 
 Flask gives you a powerful, patterns-based way to build dynamic websites that enables a clean separation of concerns and gives you full control over markup for enjoyable, agile development. Flask's functionality can be extended with numerous extensions that are updated independently from Flask itself.
