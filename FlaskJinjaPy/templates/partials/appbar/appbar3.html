@@ -1,8 +1,8 @@
 {% block appbar %}
 
 <div class="nav-scrollable appbar">
-    <nav class="nav flex-column nav nav-pills nav-stacked">
-        <!-- TWO NAVS????? OMG NAV-STACKED DEPRECATED !!!!! WRONG. -->
+    <nav class="nav flex-column nav-pills nav-stacked">
+        <!-- OMG NAV-STACKED DEPRECATED !!!!! WRONG. -->
         <div class="nav-item px-3">
             <a class="nav-link" href="{{ url_for('home') }}">
                 <span class="bi bi-house me-2"></span>
@@ -12,7 +12,7 @@
             <a class="nav-link" href="{{ url_for('about') }}">
                 <span class="bi bi-info-circle me-2"></span>
             </a>
-        </div>. 
+        </div>
         <div class="nav-item px-3">
             <a class="nav-link" href="{{ url_for('contact') }}">
                 <span class="bi bi-envelope me-2"></span> 

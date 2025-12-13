@@ -2,11 +2,13 @@
     width: 100px;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50px; /* Adjust based on appbar width */
     height: 100%;
     background-color: #f8f9fa;
     border-right: 1px solid #dee2e6;
-    padding-top: 60px; /* Adjust based on your appbar height */
+    padding-top: 60px; /* Adjust based on your navbar height */
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar a {
