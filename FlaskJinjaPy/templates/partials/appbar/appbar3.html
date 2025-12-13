@@ -1,0 +1,23 @@
+{% block appbar %}
+
+<div class="nav-scrollable appbar">
+    <nav class="nav flex-column nav nav-pills nav-stacked">
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('home') }}">
+                <span class="bi bi-house me-2"></span>
+            </a>
+        </div>
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('about') }}">
+                <span class="bi bi-info-circle me-2"></span>
+            </a>
+        </div>
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('contact') }}">
+                <span class="bi bi-envelope me-2"></span> 
+            </a>
+        </div>
+    </nav>
+</div>
+
+{% endblock %}

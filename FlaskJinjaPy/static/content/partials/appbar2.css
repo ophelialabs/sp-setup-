@@ -1,0 +1,625 @@
+.appbar {
+  display: none;
+}
+
+.dropup .caret,
+.appbar-fixed-bottom .dropdown .caret {
+  border-top: 0 dotted;
+  border-bottom: 4px solid #000000;
+  content: "";
+}
+
+.dropup .dropdown-menu,
+.appbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+
+@media (min-width: 768px) {
+  .appbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+}
+.appbar {
+  position: relative;
+  z-index: 1000;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+.appbar:before,
+.appbar:after {
+  display: table;
+  content: " ";
+}
+
+.appbar:after {
+  clear: both;
+}
+
+.appbar:before,
+.appbar:after {
+  display: table;
+  content: " ";
+}
+
+.appbar:after {
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  .appbar {
+    border-radius: 4px;
+  }
+}
+
+.appbar-header:before,
+.appbar-header:after {
+  display: table;
+  content: " ";
+}
+
+.appbar-header:after {
+  clear: both;
+}
+
+.appbar-header:before,
+.appbar-header:after {
+  display: table;
+  content: " ";
+}
+
+.appbar-header:after {
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  .appbar-header {
+    float: left;
+  }
+}
+
+.appbar-collapse {
+  max-height: 340px;
+  padding-right: 15px;
+  padding-left: 15px;
+  overflow-x: visible;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.appbar-collapse:before,
+.appbar-collapse:after {
+  display: table;
+  content: " ";
+}
+
+.appbar-collapse:after {
+  clear: both;
+}
+
+.appbar-collapse:before,
+.appbar-collapse:after {
+  display: table;
+  content: " ";
+}
+
+.appbar-collapse:after {
+  clear: both;
+}
+
+.appbar-collapse.in {
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .appbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .appbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .appbar-collapse.in {
+    overflow-y: visible;
+  }
+  .appbar-collapse .appbar-nav.appbar-left:first-child {
+    margin-left: -15px;
+  }
+  .appbar-collapse .appbar-nav.appbar-right:last-child {
+    margin-right: -15px;
+  }
+  .appbar-collapse .appbar-text:last-child {
+    margin-right: 0;
+  }
+}
+
+.container > .appbar-header,
+.container > .appbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@media (min-width: 768px) {
+  .container > .appbar-header,
+  .container > .appbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.appbar-static-top {
+  border-width: 0 0 1px;
+}
+
+@media (min-width: 768px) {
+  .appbar-static-top {
+    border-radius: 0;
+  }
+}
+
+.appbar-fixed-top,
+.appbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  border-width: 0 0 1px;
+}
+
+@media (min-width: 768px) {
+  .appbar-fixed-top,
+  .appbar-fixed-bottom {
+    border-radius: 0;
+  }
+}
+
+.appbar-fixed-top {
+  top: 0;
+  z-index: 1030;
+}
+
+.appbar-fixed-bottom {
+  bottom: 0;
+  margin-bottom: 0;
+}
+
+.appbar-brand {
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.appbar-brand:hover,
+.appbar-brand:focus {
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .appbar > .container .appbar-brand {
+    margin-left: -15px;
+  }
+}
+
+.appbar-toggle {
+  position: relative;
+  float: right;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.appbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.appbar-toggle .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+  .appbar-toggle {
+    display: none;
+  }
+}
+
+.appbar-nav {
+  margin: 7.5px -15px;
+}
+
+.appbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+
+@media (max-width: 767px) {
+  .appbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .appbar-nav .open .dropdown-menu > li > a,
+  .appbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+  .appbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px;
+  }
+  .appbar-nav .open .dropdown-menu > li > a:hover,
+  .appbar-nav .open .dropdown-menu > li > a:focus {
+    background-image: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .appbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .appbar-nav > li {
+    float: left;
+  }
+  .appbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .appbar-left {
+    float: left !important;
+  }
+  .appbar-right {
+    float: right !important;
+  }
+}
+
+.appbar-form {
+  padding: 10px 15px;
+  margin-top: 8px;
+  margin-right: -15px;
+  margin-bottom: 8px;
+  margin-left: -15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .appbar-form .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .appbar-form .form-control {
+    display: inline-block;
+  }
+  .appbar-form .radio,
+  .appbar-form .checkbox {
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .appbar-form .radio input[type="radio"],
+  .appbar-form .checkbox input[type="checkbox"] {
+    float: none;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .appbar-form .form-group {
+    margin-bottom: 5px;
+  }
+}
+
+@media (min-width: 768px) {
+  .appbar-form {
+    width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+}
+
+.appbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.appbar-fixed-bottom .appbar-nav > li > .dropdown-menu {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.appbar-nav.pull-right > li > .dropdown-menu,
+.appbar-nav > li > .dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+
+.appbar-btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.appbar-text {
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .appbar-text {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
+
+.appbar-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+}
+
+.appbar-default .appbar-brand {
+  color: #777777;
+}
+
+.appbar-default .appbar-brand:hover,
+.appbar-default .appbar-brand:focus {
+  color: #5e5e5e;
+  background-color: transparent;
+}
+
+.appbar-default .appbar-text {
+  color: #777777;
+}
+
+.appbar-default .appbar-nav > li > a {
+  color: #777777;
+}
+
+.appbar-default .appbar-nav > li > a:hover,
+.appbar-default .appbar-nav > li > a:focus {
+  color: #333333;
+  background-color: transparent;
+}
+
+.appbar-default .appbar-nav > .active > a,
+.appbar-default .appbar-nav > .active > a:hover,
+.appbar-default .appbar-nav > .active > a:focus {
+  color: #555555;
+  background-color: #e7e7e7;
+}
+
+.appbar-default .appbar-nav > .disabled > a,
+.appbar-default .appbar-nav > .disabled > a:hover,
+.appbar-default .appbar-nav > .disabled > a:focus {
+  color: #cccccc;
+  background-color: transparent;
+}
+
+.appbar-default .appbar-toggle {
+  border-color: #dddddd;
+}
+
+.appbar-default .appbar-toggle:hover,
+.appbar-default .appbar-toggle:focus {
+  background-color: #dddddd;
+}
+
+.appbar-default .appbar-toggle .icon-bar {
+  background-color: #cccccc;
+}
+
+.appbar-default .appbar-collapse,
+.appbar-default .appbar-form {
+  border-color: #e6e6e6;
+}
+
+.appbar-default .appbar-nav > .dropdown > a:hover .caret,
+.appbar-default .appbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #333333;
+  border-bottom-color: #333333;
+}
+
+.appbar-default .appbar-nav > .open > a,
+.appbar-default .appbar-nav > .open > a:hover,
+.appbar-default .appbar-nav > .open > a:focus {
+  color: #555555;
+  background-color: #e7e7e7;
+}
+
+.appbar-default .appbar-nav > .open > a .caret,
+.appbar-default .appbar-nav > .open > a:hover .caret,
+.appbar-default .appbar-nav > .open > a:focus .caret {
+  border-top-color: #555555;
+  border-bottom-color: #555555;
+}
+
+.appbar-default .appbar-nav > .dropdown > a .caret {
+  border-top-color: #777777;
+  border-bottom-color: #777777;
+}
+
+@media (max-width: 767px) {
+  .appbar-default .appbar-nav .open .dropdown-menu > li > a {
+    color: #777777;
+  }
+  .appbar-default .appbar-nav .open .dropdown-menu > li > a:hover,
+  .appbar-default .appbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333333;
+    background-color: transparent;
+  }
+  .appbar-default .appbar-nav .open .dropdown-menu > .active > a,
+  .appbar-default .appbar-nav .open .dropdown-menu > .active > a:hover,
+  .appbar-default .appbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555555;
+    background-color: #e7e7e7;
+  }
+  .appbar-default .appbar-nav .open .dropdown-menu > .disabled > a,
+  .appbar-default .appbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .appbar-default .appbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #cccccc;
+    background-color: transparent;
+  }
+}
+
+.appbar-default .appbar-link {
+  color: #777777;
+}
+
+.appbar-default .appbar-link:hover {
+  color: #333333;
+}
+
+.appbar-inverse {
+  background-color: #222222;
+  border-color: #080808;
+}
+
+.appbar-inverse .appbar-brand {
+  color: #999999;
+}
+
+.appbar-inverse .appbar-brand:hover,
+.appbar-inverse .appbar-brand:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.appbar-inverse .appbar-text {
+  color: #999999;
+}
+
+.appbar-inverse .appbar-nav > li > a {
+  color: #999999;
+}
+
+.appbar-inverse .appbar-nav > li > a:hover,
+.appbar-inverse .appbar-nav > li > a:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.appbar-inverse .appbar-nav > .active > a,
+.appbar-inverse .appbar-nav > .active > a:hover,
+.appbar-inverse .appbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #080808;
+}
+
+.appbar-inverse .appbar-nav > .disabled > a,
+.appbar-inverse .appbar-nav > .disabled > a:hover,
+.appbar-inverse .appbar-nav > .disabled > a:focus {
+  color: #444444;
+  background-color: transparent;
+}
+
+.appbar-inverse .appbar-toggle {
+  border-color: #333333;
+}
+
+.appbar-inverse .appbar-toggle:hover,
+.appbar-inverse .appbar-toggle:focus {
+  background-color: #333333;
+}
+
+.appbar-inverse .appbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+
+.appbar-inverse .appbar-collapse,
+.appbar-inverse .appbar-form {
+  border-color: #101010;
+}
+
+.appbar-inverse .appbar-nav > .open > a,
+.appbar-inverse .appbar-nav > .open > a:hover,
+.appbar-inverse .appbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #080808;
+}
+
+.appbar-inverse .appbar-nav > .dropdown > a:hover .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+.appbar-inverse .appbar-nav > .dropdown > a .caret {
+  border-top-color: #999999;
+  border-bottom-color: #999999;
+}
+
+.appbar-inverse .appbar-nav > .open > a .caret,
+.appbar-inverse .appbar-nav > .open > a:hover .caret,
+.appbar-inverse .appbar-nav > .open > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #080808;
+  }
+  .appbar-inverse .appbar-nav .open .dropdown-menu > li > a {
+    color: #999999;
+  }
+  .appbar-inverse .appbar-nav .open .dropdown-menu > li > a:hover,
+  .appbar-inverse .appbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+    background-color: transparent;
+  }
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .active > a,
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .active > a:hover,
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #080808;
+  }
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .disabled > a,
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .appbar-inverse .appbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444444;
+    background-color: transparent;
+  }
+}
+
+.appbar-inverse .appbar-link {
+  color: #999999;
+}
+
+.appbar-inverse .appbar-link:hover {
+  color: #ffffff;
+}
+body.modal-open,
+.modal-open .appbar-fixed-top,
+.modal-open .appbar-fixed-bottom {
+  margin-right: 15px;
+}

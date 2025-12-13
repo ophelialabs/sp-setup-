@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Welcome to App</h1>
+    <p class="lead">Flask is a lightweight WSGI web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. It began as a simple wrapper around Werkzeug and Jinja and has become one of the most popular Python web application frameworks.</p>
+    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-primary me-2">New</span>
+                    <small class="text-muted">August 25, 2025</small>
+                </div>
+                <h5 class="card-title">Best Practices Guide Updated</h5>
+                <p class="card-text">New security guidelines and cloud architecture patterns added to the documentation.</p>
+                <a href="pages/docs/best-practices.html" class="btn btn-link p-0">Read More →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-success me-2">Updated</span>
+                    <small class="text-muted">August 23, 2025</small>
+                </div>
+                <h5 class="card-title">API Documentation Enhanced</h5>
+                <p class="card-text">Improved API reference documentation with new interactive examples.</p>
+                <a href="pages/docs/api-reference.html" class="btn btn-link p-0">Read More →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-info me-2">Coming Soon</span>
+                    <small class="text-muted">September 1, 2025</small>
+                </div>
+                <h5 class="card-title">New Architecture Diagrams</h5>
+                <p class="card-text">Interactive system architecture diagrams coming to the documentation.</p>
+                <a href="pages/docs/architecture.html" class="btn btn-link p-0">Preview →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

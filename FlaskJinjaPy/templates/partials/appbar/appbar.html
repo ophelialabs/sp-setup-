@@ -1,0 +1,11 @@
+{% block appbar %}
+    
+<div class="well appbar">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+</div>
+
+{% endblock %}
