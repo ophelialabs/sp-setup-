@@ -1,4 +1,5 @@
 body {
+    /* nav bar fixed top !!!!!!!!!!!!!!!!!!!!!!!!!!! */ 
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -71,6 +72,7 @@ div.validation-summary-valid {
 
 /* styles for appbar */
 .appbar {
+    /* display flex? !!!!!!!!!!!!!!!!!!!!!!!! */ 
     justify-content: center;
     max-width: 50px;
     padding: 15px;

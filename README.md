@@ -1,4 +1,10 @@
 # Flask
+ - Focus on UI dev
+ - Create sidebar to be renamed 'appbar' for global site nav and add appropriate styles
+ - create second sidebar so that most styles are reused
+ - edit styles so that the appbar and sidebar can easily be switched sides
+ - create agent ui that can be easily enabled/disabled
+ - Setup template to make future site building more efficient
 
 Flask is a Python project that demonstrates how to build web applications using [Flask](https://flask.palletsprojects.com/) and [Jinja2](https://jinja.palletsprojects.com/).
 
