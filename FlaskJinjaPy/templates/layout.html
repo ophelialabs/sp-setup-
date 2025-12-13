@@ -15,7 +15,7 @@
 <body>
 
         {% block navbar %}
-            {% include "partials/navbar.html" %}
+            {% include "partials/navbar/navbar.html" %}
         {% endblock navbar %}
 
         <!-- Comment out if not wanted or needed -->
@@ -32,15 +32,13 @@
         {% block content %}{% endblock %}
     </div>
 
-    <div class="container">
+
         {% block footer %}
             {% include "partials/footer.html" %}
         {% endblock footer %}
-    </div>
 
-    <script src="/static/scripts/jquery-1.10.2.js"></script>
-    <script src="/static/scripts/bootstrap.js"></script>
-    <script src="/static/scripts/respond.js"></script>
+
+    <script src="/static/scripts/_references.js"></script>
     {% block scripts %}{% endblock %}
 
 </body>

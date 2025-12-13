@@ -4,9 +4,116 @@
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #f8f9fa;
+    background-color: #838383;
     border-right: 1px solid #dee2e6;
     padding-top: 60px; /* Adjust based on your navbar height */
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
  }
+
+ .appbar-fixed-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1030; /* Ensure it stays above other content */
+}
+
+.appbar-fixed-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1030; /* Ensure it stays above other content */
+}
+
+.appbar a {
+    display: block;
+    color: #000;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.appbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.content-with-appbar {
+    margin-left: 100px; /* Same as the width of the appbar */
+    padding: 20px;
+}
+
+.main-content {
+    margin-left: 120px; /* Adjust based on appbar width + some margin */
+    padding: 20px;
+}
+
+.appbar .active {
+    background-color: #007bff;
+    color: white;
+}
+
+.appbar .active:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.nav-scrollable {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.nav-scrollable .nav-link {
+    white-space: nowrap;
+}
+
+.nav-scrollable .nav-link .bi {
+    font-size: 1.5rem; /* Adjust icon size as needed */
+    vertical-align: middle;
+}
+
+.nav-scrollable .nav-link {
+    text-align: center; /* Center align the icons */
+}
+
+.nav-scrollable .nav-link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.nav-scrollable .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.nav-scrollable .nav-link.active:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .appbar {
+        width: 80px;
+        padding-top: 50px; /* Adjust based on your navbar height */
+    }       
+    .content-with-appbar {
+        margin-left: 80px; /* Adjust based on the width of the appbar */
+    }
+    .main-content {
+        margin-left: 100px; /* Adjust based on appbar width + some margin */
+    }
+}
+@media (max-width: 576px) {
+    .appbar {
+        width: 60px;
+        padding-top: 40px; /* Adjust based on your navbar height */
+    }       
+    .content-with-appbar {
+        margin-left: 60px; /* Adjust based on the width of the appbar */
+    }
+    .main-content {
+        margin-left: 80px; /* Adjust based on appbar width + some margin */
+    }
+}   

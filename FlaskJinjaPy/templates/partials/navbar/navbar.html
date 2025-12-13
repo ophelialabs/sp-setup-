@@ -1,0 +1,30 @@
+    <div class="navbar navbar-inverse navbar-fixed-top" style="color: white; background-color: #2564cf;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="static/assets/Gemini_Generated_logo.png" style="width: 24px; height: 24px;" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav ms-auto align-items-center flex">
+                    <li><a href="{{ url_for('admindashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><input type="search" placeholder="Search"></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('messages') }}"><class="appbar-icon">🔔</a></li>
+                    <li><a href="{{ url_for('profile') }}"><class="appbar-icon">👤</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--
+<form class="d-flex mx-auto" style="width: 50%; position: relative;" role="search" onsubmit="return false;">
+    <input class="form-control" type="search" id="searchInput" placeholder="Search..." aria-label="Search">
+</form>
+-->

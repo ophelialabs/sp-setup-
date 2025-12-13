@@ -50,8 +50,18 @@ def admindashboard():
 def profile():
     """Renders the user profile page."""
     return render_template(
-        'profile.html',
+        'pages/profile.html',
         title='User Profile',
         year=datetime.now().year,
         message='Your user profile page.'
+    )
+
+@app.route('/partials/_messages.html')
+def messages():
+    """Renders the messages partial."""
+    return render_template(
+        'partials/_messages.html',
+        title='Messages Partial',
+        year=datetime.now().year,
+        message='This is a messages partial.'
     )
