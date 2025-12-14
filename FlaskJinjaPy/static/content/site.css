@@ -6,7 +6,7 @@ body {
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    border: #b94a48 5px solid;
+    border: #f9f6f6 5px solid;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -89,6 +89,13 @@ div.validation-summary-valid {
     background: #2564cf;
     color: #fff;
     font-size: 0.9375rem;
+}
+
+.footer-fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1030; /* Ensure it stays above other content */
 }
 
 .footer h6 {
