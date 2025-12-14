@@ -4,7 +4,7 @@
     top: 0;
     left: 50px; /* Adjust based on appbar width */
     height: 100%;
-    background-color: #f8f9fa;
+    background-color: #9b9b9b;
     border-right: 1px solid #dee2e6;
     padding-top: 60px; /* Adjust based on your navbar height */
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -13,10 +13,10 @@
 
 .sidebar-fixed-left {
     position: fixed;
-    top: 0;
     left: 0;
     height: 100%;
-    z-index: 1030; /* Ensure it stays above other content */
+    background-color: #c0c0c0;
+    /* z-index: 1030; /* Ensure it stays above other content */
 }
 
 .sidebar-fixed-right {

@@ -7,6 +7,8 @@ body {
 /* Set padding to keep content from hitting the edges */
 .body-content {
     border: #f9f6f6 5px solid;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -68,6 +70,13 @@ div.validation-summary-valid {
     display: none;
 }
 
+.sitenav {
+    background: #2564cf;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #e6e6e6;
+    height: 5vh;
+}
+
 .card {
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -91,8 +100,10 @@ div.validation-summary-valid {
     font-size: 0.9375rem;
     position: fixed;
     bottom: 0;
+    height: 10vh;
     width: 100%;
     z-index: 1030; /* Ensure it stays above other content */
+    overflow-y: auto;
 }
 
 .footer h6 {

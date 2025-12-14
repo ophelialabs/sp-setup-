@@ -1,3 +1,6 @@
+![Banner](FlaskJinjaPy/static/assets/ui.png)
+![Banner](FlaskJinjaPy/static/assets/ui2.png)
+
 # Flask
  - Focus on UI dev
  - Create sidebar to be renamed 'appbar' for global site nav and add appropriate styles

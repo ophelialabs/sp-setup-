@@ -18,16 +18,17 @@
             {% include "partials/navbar/navbar.html" %}
         {% endblock navbar %}
 
-        <!-- Comment out if not wanted or needed -->
-        {% block appbar %}
-            {% include "partials/appbar/appbar3.html" %}
-        {% endblock appbar %}
+        {% block sitenav %}
+            {% include "partials/navbar/sitenav.html" %}
+        {% endblock sitenav %}
 
-        <!-- Comment out if not wanted or needed
+        <!-- Add appbar her if wanted or needed -->
+        
+
+        <!-- Comment out if not wanted or needed -->
         {% block sidebar %}
             {% include "partials/sidebar.html" %}
         {% endblock sidebar %}
-        -->
 
     <div class="container body-content">
         {% block content %}{% endblock %}
