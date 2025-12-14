@@ -1,0 +1,682 @@
+{% extends "layout.html" %}
+
+{% block title %}Research Feed{% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unified research article feed aggregator. Search and filter latest research from Science Advances, Journal of Advanced Research, IEEE, NCBI, and ARCNL sources.">
+    <meta name="keywords" content="research articles, science feed, IEEE research, NCBI journals, advanced research, RSS feed aggregator, scientific articles">
+    <meta name="author" content="Research Feed Aggregator">
+    <title>Unified Research Article Feed - Latest Science & Engineering</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container-main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .search-section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .search-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+            transform: scale(1.02);
+        }
+
+        .search-input::placeholder {
+            color: #aaa;
+        }
+
+        .source-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .source-btn {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .source-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .source-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .feed-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out 0.1s both;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .articles-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-left: 5px solid #667eea;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            border-left-color: #764ba2;
+        }
+
+        .article-header {
+            padding: 25px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-source {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            flex-wrap: wrap;
+        }
+
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .article-date i {
+            color: #667eea;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .article-body {
+            padding: 0 25px 25px;
+        }
+
+        .article-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .article-action {
+            padding: 0 25px 15px;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background: #764ba2;
+            transform: translateX(5px);
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .sort-btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sort-btn:hover,
+        .sort-btn.active {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-main">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="bi bi-rss-fill"></i> Research Article Feed</h1>
+            <p>Unified aggregation of latest scientific research from top sources</p>
+        </div>
+
+        <!-- Feed Stats -->
+        <div class="feed-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalArticles">0</div>
+                <div class="stat-label">Total Articles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="activeSources">6</div>
+                <div class="stat-label">Active Sources</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="thisWeek">0</div>
+                <div class="stat-label">This Week</div>
+            </div>
+        </div>
+
+        <!-- Search & Filter Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search articles by keywords, title, or author...">
+                
+                <div style="margin-top: 20px;">
+                    <div style="color: #667eea; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem;">Filter by Source:</div>
+                    <div class="source-filters">
+                        <button class="source-btn active" data-source="all">All Sources</button>
+                        <button class="source-btn" data-source="science-advances">Science Advances</button>
+                        <button class="source-btn" data-source="journal-adv-research">Journal of Advanced Research</button>
+                        <button class="source-btn" data-source="ieee">IEEE Xplore</button>
+                        <button class="source-btn" data-source="ncbi-indexed">NCBI Indexed</button>
+                        <button class="source-btn" data-source="ncbi-pmc">NCBI PMC</button>
+                        <button class="source-btn" data-source="arcnl">ARCNL</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <div style="color: #667eea; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem;">Sort By:</div>
+                    <div class="sort-options">
+                        <button class="sort-btn active" data-sort="latest">Latest Published</button>
+                        <button class="sort-btn" data-sort="oldest">Oldest First</button>
+                        <button class="sort-btn" data-sort="title">Alphabetical (A-Z)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Articles Container -->
+        <div id="articlesContainer" class="articles-container">
+            <div class="loading">
+                <span class="loading-spinner"></span>
+                <span>Loading research articles from all sources...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample research data aggregated from the sources
+        // In production, this would fetch from actual RSS feeds via a backend service
+        const researchArticles = [
+            {
+                id: 1,
+                title: 'Quantum Computing Advances in Error Correction',
+                source: 'science-advances',
+                sourceName: 'Science Advances',
+                date: new Date('2025-01-14'),
+                category: 'Physics',
+                description: 'Latest breakthroughs in quantum error correction codes enabling scalable quantum computers with enhanced fault tolerance.',
+                tags: ['Quantum Computing', 'Physics', 'Error Correction', 'Technology'],
+                url: 'https://www.science.org/journal/sciadv/research'
+            },
+            {
+                id: 2,
+                title: 'Novel Nanomaterials for Solar Energy Conversion',
+                source: 'journal-adv-research',
+                sourceName: 'Journal of Advanced Research',
+                date: new Date('2025-01-13'),
+                category: 'Materials Science',
+                description: 'Development of perovskite-based nanomaterials achieving 25% efficiency in photovoltaic applications with improved stability.',
+                tags: ['Nanotechnology', 'Solar Energy', 'Materials', 'Sustainability'],
+                url: 'https://www.sciencedirect.com/journal/journal-of-advanced-research/'
+            },
+            {
+                id: 3,
+                title: 'AI-Driven Climate Modeling for Sustainable Development',
+                source: 'ieee',
+                sourceName: 'IEEE Xplore',
+                date: new Date('2025-01-12'),
+                category: 'Environmental Science',
+                description: 'Machine learning approaches for climate prediction and carbon footprint optimization in industrial systems.',
+                tags: ['Climate Change', 'AI/ML', 'Sustainability', 'Engineering'],
+                url: 'https://ieeexplore.ieee.org/search/searchresult.jsp?topic=sustainableClimate'
+            },
+            {
+                id: 4,
+                title: 'CRISPR Gene Therapy: Clinical Trials Update',
+                source: 'ncbi-indexed',
+                sourceName: 'NCBI Indexed Journals',
+                date: new Date('2025-01-11'),
+                category: 'Biotechnology',
+                description: 'Progress update on CRISPR-based gene therapies showing promising results in treating genetic disorders.',
+                tags: ['CRISPR', 'Genetics', 'Biotechnology', 'Medical'],
+                url: 'https://www.ncbi.nlm.nih.gov/nlmcatalog?term=currentlyindexed'
+            },
+            {
+                id: 5,
+                title: 'mRNA Vaccine Platform for Emerging Pathogens',
+                source: 'ncbi-pmc',
+                sourceName: 'NCBI PMC',
+                date: new Date('2025-01-10'),
+                category: 'Immunology',
+                description: 'Novel mRNA vaccine technologies adaptable to emerging infectious diseases with rapid development timelines.',
+                tags: ['mRNA', 'Vaccines', 'Immunology', 'Public Health'],
+                url: 'https://www.ncbi.nlm.nih.gov/nlmcatalog?term=journalspmc'
+            },
+            {
+                id: 6,
+                title: 'Attosecond Spectroscopy Imaging Breakthrough',
+                source: 'arcnl',
+                sourceName: 'ARCNL',
+                date: new Date('2025-01-09'),
+                category: 'Physics',
+                description: 'Advanced imaging techniques using attosecond pulses for visualization of electron dynamics in real-time.',
+                tags: ['Spectroscopy', 'Physics', 'Imaging', 'Research'],
+                url: 'https://ir.arcnl.nl'
+            },
+            {
+                id: 7,
+                title: 'Machine Learning Models for Drug Discovery',
+                source: 'science-advances',
+                sourceName: 'Science Advances',
+                date: new Date('2025-01-08'),
+                category: 'Pharmaceutical',
+                description: 'AI accelerates pharmaceutical development with predictive models for compound efficacy and toxicity screening.',
+                tags: ['Drug Discovery', 'AI/ML', 'Pharmaceuticals', 'Medical'],
+                url: 'https://www.science.org/journal/sciadv/research'
+            },
+            {
+                id: 8,
+                title: 'Graphene-Based Electronics for Next-Gen Devices',
+                source: 'journal-adv-research',
+                sourceName: 'Journal of Advanced Research',
+                date: new Date('2025-01-07'),
+                category: 'Electronics',
+                description: 'Integration of graphene in flexible electronics enabling wearable sensors and high-speed processors.',
+                tags: ['Graphene', 'Electronics', 'Nanotechnology', 'Devices'],
+                url: 'https://www.sciencedirect.com/journal/journal-of-advanced-research/'
+            },
+            {
+                id: 9,
+                title: 'Biodegradable Polymers for Sustainable Packaging',
+                source: 'ieee',
+                sourceName: 'IEEE Xplore',
+                date: new Date('2025-01-06'),
+                category: 'Materials Science',
+                description: 'Development of eco-friendly polymers designed for full biodegradation while maintaining structural integrity.',
+                tags: ['Sustainability', 'Materials', 'Environment', 'Engineering'],
+                url: 'https://ieeexplore.ieee.org/search/searchresult.jsp?topic=sustainableClimate'
+            },
+            {
+                id: 10,
+                title: 'Brain-Computer Interface: Neural Decoding Advances',
+                source: 'ncbi-indexed',
+                sourceName: 'NCBI Indexed Journals',
+                date: new Date('2025-01-05'),
+                category: 'Neuroscience',
+                description: 'High-resolution neural decoding enabling direct communication between brain and external devices.',
+                tags: ['Brain-Computer Interface', 'Neuroscience', 'Medical', 'Technology'],
+                url: 'https://www.ncbi.nlm.nih.gov/nlmcatalog?term=currentlyindexed'
+            },
+            {
+                id: 11,
+                title: 'Carbon Capture Technologies: Industrial Scale-up',
+                source: 'ncbi-pmc',
+                sourceName: 'NCBI PMC',
+                date: new Date('2025-01-04'),
+                category: 'Environmental Science',
+                description: 'Scaling carbon capture and storage technology for industrial emissions reduction and climate impact.',
+                tags: ['Carbon Capture', 'Climate', 'Environment', 'Technology'],
+                url: 'https://www.ncbi.nlm.nih.gov/nlmcatalog?term=journalspmc'
+            },
+            {
+                id: 12,
+                title: 'Quantum Entanglement in Macroscopic Objects',
+                source: 'arcnl',
+                sourceName: 'ARCNL',
+                date: new Date('2025-01-03'),
+                category: 'Physics',
+                description: 'Demonstration of quantum entanglement in large-scale objects challenging classical mechanics boundaries.',
+                tags: ['Quantum Physics', 'Entanglement', 'Fundamental Physics'],
+                url: 'https://ir.arcnl.nl'
+            }
+        ];
+
+        let currentSort = 'latest';
+        let searchTerm = '';
+        let selectedSource = 'all';
+
+        const sourceMap = {
+            'science-advances': 'Science Advances',
+            'journal-adv-research': 'Journal of Advanced Research',
+            'ieee': 'IEEE Xplore',
+            'ncbi-indexed': 'NCBI Indexed',
+            'ncbi-pmc': 'NCBI PMC',
+            'arcnl': 'ARCNL'
+        };
+
+        function renderArticles() {
+            const container = document.getElementById('articlesContainer');
+            
+            let filtered = researchArticles.filter(article => {
+                const matchesSearch = searchTerm === '' || 
+                    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                    article.category.toLowerCase().includes(searchTerm.toLowerCase());
+                
+                const matchesSource = selectedSource === 'all' || article.source === selectedSource;
+                
+                return matchesSearch && matchesSource;
+            });
+
+            // Sort articles
+            if (currentSort === 'latest') {
+                filtered.sort((a, b) => b.date - a.date);
+            } else if (currentSort === 'oldest') {
+                filtered.sort((a, b) => a.date - b.date);
+            } else if (currentSort === 'title') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            }
+
+            // Update stats
+            document.getElementById('totalArticles').textContent = researchArticles.length;
+            document.getElementById('thisWeek').textContent = researchArticles.filter(a => {
+                const oneWeekAgo = new Date();
+                oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+                return a.date >= oneWeekAgo;
+            }).length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="no-results">No articles found matching your search criteria. Try different keywords or filters.</div>';
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(article => {
+                const dateStr = article.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+
+                html += `
+                    <a href="${article.url}" class="article-card" target="_blank" rel="noopener noreferrer" title="Visit ${article.sourceName}">
+                        <div class="article-header">
+                            <span class="article-source">${article.sourceName}</span>
+                            <div class="article-title">${article.title}</div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="bi bi-calendar-event"></i>
+                                    <span>${dateStr}</span>
+                                </div>
+                                <span class="article-category">${article.category}</span>
+                            </div>
+                        </div>
+                        <div class="article-body">
+                            <div class="article-description">${article.description}</div>
+                            <div class="article-tags">
+                                ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="article-action">
+                            <span class="read-more-btn">Read More <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </a>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('keyup', (e) => {
+            searchTerm = e.target.value;
+            renderArticles();
+        });
+
+        document.querySelectorAll('.source-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedSource = btn.dataset.source;
+                renderArticles();
+            });
+        });
+
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSort = btn.dataset.sort;
+                renderArticles();
+            });
+        });
+
+        // Initial render
+        setTimeout(() => {
+            renderArticles();
+        }, 500);
+    </script>
+
+</body>
+
+</html>
+
+{% endblock %}

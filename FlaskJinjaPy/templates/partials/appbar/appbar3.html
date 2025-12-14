@@ -1,6 +1,6 @@
 {% block appbar %}
 
-<div class="appbar ">
+<div class="appbar appbar-fixed-left">
     <nav class="nav flex-column nav-pills nav-stacked">
         <!-- OMG NAV-STACKED DEPRECATED !!!!! WRONG. -->
         <div class="nav-item px-3">
@@ -9,12 +9,32 @@
             </a>
         </div>
         <div class="nav-item px-3">
-            <a class="nav-link" href="{{ url_for('about') }}">
-                <span class="bi bi-info-circle me-2"></span>
+            <a class="nav-link" href="{{ url_for('news') }}">
+                <span class="bi bi-info-circle me-2"></span> 
             </a>
         </div>
         <div class="nav-item px-3">
-            <a class="nav-link" href="{{ url_for('contact') }}">
+            <a class="nav-link" href="{{ url_for('research') }}">
+                <span class="bi bi-info-circle me-2"></span> 
+            </a>
+        </div>
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('connections') }}">
+                <span class="bi bi-code-square text-primary mb-2"></span> 
+            </a>
+        </div>
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('files') }}">
+                <span class="bi bi-folder me-1"></span> 
+            </a>
+        </div>
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('lists') }}">
+                <span class="bi bi-envelope me-2"></span> 
+            </a>
+        </div>
+        <div class="nav-item px-3">
+            <a class="nav-link" href="{{ url_for('sites') }}">
                 <span class="bi bi-envelope me-2"></span> 
             </a>
         </div>
