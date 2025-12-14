@@ -89,9 +89,6 @@ div.validation-summary-valid {
     background: #2564cf;
     color: #fff;
     font-size: 0.9375rem;
-}
-
-.footer-fixed-bottom {
     position: fixed;
     bottom: 0;
     width: 100%;
