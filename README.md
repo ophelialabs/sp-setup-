@@ -1,3 +1,5 @@
+[Solr](https://apache.github.io/solr-operator/docs/solr-prometheus-exporter/#prometheus-stack)
+
 ![Banner](FlaskJinjaPy/static/assets/ui.png)
 ![Banner](FlaskJinjaPy/static/assets/ui2.png)
 
