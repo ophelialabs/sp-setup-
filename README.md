@@ -1,5 +1,6 @@
 ## Why is it so? 
 Does Not make Python/Flask the correct option but a building block and learning step
+ * Note html "blocks"
 
 [Solr](https://apache.github.io/solr-operator/docs/solr-prometheus-exporter/#prometheus-stack)
 
