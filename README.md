@@ -9,7 +9,7 @@ Does Not make Python/Flask the correct option but a building block and learning 
 # Flask
  - Focus on UI dev
  - Create sidebar to be renamed 'appbar' for global site nav and add appropriate styles
- - create second sidebar so that most styles are reused
+ - Right-sidebar page placement created, multi-lingual
  - edit styles so that the appbar and sidebar can easily be switched sides
  - create agent ui that can be easily enabled/disabled
  - Setup template to make future site building more efficient
