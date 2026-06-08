@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flask Project Generator Script</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PrismJS for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Fluent UI Bootstrap theme (Bootswatch 'Flatly' as a Fluent-like example) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="static/pipeline.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../../../index.html">
+                <svg width="32" height="32" fill="#fff" class="me-2" viewBox="0 0 16 16"><rect width="16" height="16" rx="4"/></svg>
+                <span style="font-weight:600;letter-spacing:0.03em;">Ophelia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link fluent-btn" href="flask.html">Generator</a>
+                    <a class="nav-link fluent-btn" href="generator.sh">Download</a>
+                    <a class="nav-link fluent-btn" href="#" target="_blank" rel="noopener noreferrer">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title">Flask Project Generator Script</h1>
+                        
+                        <div class="alert alert-info mt-3">
+                            <h5>Description</h5>
+                            <p>This shell script automatically generates a complete Flask project structure with the following features:</p>
+                            <ul>
+                                <li>Creates a standardized directory structure</li>
+                                <li>Sets up authentication blueprints</li>
+                                <li>Configures database integration</li>
+                                <li>Includes deployment options for local, uWSGI, and Apache</li>
+                                <li>Generates necessary configuration files</li>
+                            </ul>
+                            <h5 class="mt-3">Project Structure</h5>
+                            <pre class="mb-0"><code>project_name/
+├── ai/
+│   ├── chat_assistants/
+│   │   └── base_assistant.py
+│   ├── integrations/
+│   ├── models/
+│   ├── pipelines/
+│   ├── vectorstores/
+│   ├── __init__.py
+│   └── config.py
+├── auth/
+│   ├── routes.py
+│   └── __init__.py
+├── config/
+│   └── config.py
+├── database/
+│   ├── migrations/
+│   ├── models/
+│   │   └── __init__.py
+│   └── scripts/
+├── docs/
+├── llm/
+│   ├── chains/
+│   ├── embeddings/
+│   ├── prompts/
+│   └── __init__.py
+├── logs/
+├── ml/
+│   ├── evaluation/
+│   ├── inference/
+│   ├── training/
+│   └── __init__.py
+├── project_name/
+│   ├── __init__.py
+│   ├── app.py
+│   └── wsgi.py
+├── static/
+│   ├── css/
+│   ├── images/
+│   └── js/
+├── templates/
+│   └── base.html
+├── tests/
+│   ├── integration/
+│   └── unit/
+├── utils/
+│   └── __init__.py
+├── .env
+├── .gitignore
+├── apache_config.conf
+├── requirements.txt
+└── uwsgi.ini</code></pre>
+                        </div>
+
+                        <h5 class="mt-4">Script Source Code</h5>
+                        <pre><code class="language-bash">#!/bin/bash
+
+# Ask for project name
+read -p "Enter your Flask project name: " project_name
+
+# Validate project name
+if [ -z "$project_name" ]; then
+    echo "Project name cannot be empty."
+    exit 1
+fi
+
+# Detect OS
+os_name=$(uname)
+echo "Detected OS: $os_name"
+
+# Get home directory
+home_dir=$HOME
+project_dir="$home_dir/$project_name"
+
+# Check if directory exists
+if [ -d "$project_dir" ]; then
+    echo "Directory $project_dir already exists."
+    exit 1
+fi
+
+# Create flask project structure
+mkdir -p "$project_dir/templates"
+mkdir -p "$project_dir/static/{css,js,images}"
+mkdir -p "$project_dir/$project_name"
+mkdir -p "$project_dir/database/{migrations,models,scripts}"
+mkdir -p "$project_dir/tests/unit"
+mkdir -p "$project_dir/tests/integration"
+mkdir -p "$project_dir/config"
+mkdir -p "$project_dir/auth"
+mkdir -p "$project_dir/utils"
+mkdir -p "$project_dir/logs"
+mkdir -p "$project_dir/docs"
+mkdir -p "$project_dir/ai/{models,pipelines,vectorstores}"
+mkdir -p "$project_dir/llm/{embeddings,prompts,chains}"
+mkdir -p "$project_dir/ml/{training,inference,evaluation}"
+mkdir -p "$project_dir/ai/chat_assistants"
+mkdir -p "$project_dir/ai/integrations"
+
+# Create necessary files
+touch "$project_dir/$project_name/__init__.py"
+touch "$project_dir/database/models/__init__.py"
+touch "$project_dir/auth/__init__.py"
+touch "$project_dir/utils/__init__.py"
+touch "$project_dir/tests/__init__.py"
+touch "$project_dir/ai/__init__.py"
+touch "$project_dir/llm/__init__.py"
+touch "$project_dir/ml/__init__.py"
+
+# Create configuration files
+cat > "$project_dir/config/config.py" << 'EOF'
+class Config:
+    SECRET_KEY = 'your-secret-key'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
+
+class ProductionConfig(Config):
+    DEBUG = False
+    SQLALCHEMY_DATABASE_URI = 'postgresql://user:password@localhost/dbname'
+EOF
+
+# Create a basic AI configuration file
+cat > "$project_dir/ai/config.py" << 'EOF'
+class AIConfig:
+    HUGGINGFACE_API_KEY = "your-api-key"
+    OPENAI_API_KEY = "your-api-key"
+    ANTHROPIC_API_KEY = "your-api-key"
+    
+    # Vector store settings
+    FAISS_INDEX_PATH = "vectorstores/faiss"
+    
+    # Model settings
+    DEFAULT_LLM_MODEL = "gpt-3.5-turbo"
+    DEFAULT_EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
+EOF
+
+# Create a basic chat assistant template
+cat > "$project_dir/ai/chat_assistants/base_assistant.py" << 'EOF'
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+
+class BaseAssistant:
+    def __init__(self, model_name="gpt-3.5-turbo"):
+        self.llm = ChatOpenAI(model_name=model_name)
+        self.memory = ConversationBufferMemory()
+        self.chain = ConversationChain(
+            llm=self.llm,
+            memory=self.memory
+        )
+    
+    def chat(self, message: str) -> str:
+        response = self.chain.predict(input=message)
+        return response
+EOF
+
+# Create uwsgi.ini
+cat > "$project_dir/uwsgi.ini" << EOF
+[uwsgi]
+module = $project_name.wsgi:app
+master = true
+processes = 5
+socket = $project_name.sock
+chmod-socket = 660
+vacuum = true
+die-on-term = true
+EOF
+
+# Create Apache configuration
+cat > "$project_dir/apache_config.conf" << EOF
+<VirtualHost *:80>
+    ServerName yourdomain.com
+    WSGIDaemonProcess $project_name python-path=$project_dir
+    WSGIProcessGroup $project_name
+    WSGIScriptAlias / $project_dir/$project_name/wsgi.py
+
+    <Directory $project_dir/$project_name>
+        Require all granted
+    </Directory>
+</VirtualHost>
+EOF
+
+# Create wsgi.py
+cat > "$project_dir/$project_name/wsgi.py" << 'EOF'
+from .app import create_app
+
+app = create_app()
+
+if __name__ == "__main__":
+    app.run()
+EOF
+
+# Create flask app.py
+cat > "$project_dir/$project_name/app.py" << 'EOF'
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+
+db = SQLAlchemy()
+login_manager = LoginManager()
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('config.DevelopmentConfig')
+
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    from .auth import auth_bp
+    app.register_blueprint(auth_bp)
+
+    @app.route('/')
+    def home():
+        return render_template('index.html')
+
+    return app
+EOF
+
+# Create auth blueprint
+cat > "$project_dir/auth/routes.py" << 'EOF'
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import login_user, logout_user, login_required
+
+auth_bp = Blueprint('auth', __name__)
+
+@auth_bp.route('/login')
+def login():
+    return render_template('auth/login.html')
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+EOF
+
+# Create base template
+cat > "$project_dir/templates/base.html" << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+EOF
+
+# Update requirements.txt
+cat > "$project_dir/requirements.txt" << EOF
+flask
+flask-login
+flask-jwt-extended
+flask-cors
+flask-sqlalchemy
+flask-migrate
+flask-wtf
+uwsgi
+gunicorn
+python-dotenv
+requests
+openai
+transformers
+pytest
+pytest-cov
+black
+flake8
+sphinx
+
+# General Database packages
+pymysql
+psycopg2-binary
+sqlalchemy
+alembic
+
+# Oracle Integration
+cx_Oracle
+oracledb
+oracle-asmlib
+exadata-express-client
+
+# Amazon Integration
+boto3
+botocore
+amazon-dax-client
+aws-xray-sdk
+
+# Google Cloud Integration
+google-cloud-sql
+google-cloud-spanner
+google-cloud-datastore
+google-cloud-bigquery
+
+# IBM Integration
+ibm-db
+ibm-db-sa
+cloudant
+ibmcloudant
+
+# AI/ML packages
+torch
+tensorflow
+huggingface-hub[cli,torch,tensorflow]
+faiss-cpu
+langchain
+sentence-transformers
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+
+# Vector Stores
+chromadb
+qdrant-client
+pinecone-client
+
+# LLM packages
+anthropic
+cohere
+llama-cpp-python
+EOF
+
+# Create .env file
+cat > "$project_dir/.env" << EOF
+FLASK_APP=$project_name/app.py
+FLASK_ENV=development
+DATABASE_URL=sqlite:///dev.db
+SECRET_KEY=your-secret-key-here
+EOF
+
+# Create .gitignore
+cat > "$project_dir/.gitignore" << EOF
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+*.db
+.DS_Store
+logs/
+.coverage
+htmlcov/
+EOF
+
+echo "flask Flask project '$project_name' created at $project_dir"
+# Create and activate virtual environment
+python3 -m venv "$project_dir/venv"
+source "$project_dir/venv/bin/activate"
+
+# Install requirements
+cd "$project_dir"
+pip install -r requirements.txt
+
+# Prompt for deployment method
+echo "How would you like to deploy the application?"
+echo "1. Local development server"
+echo "2. uWSGI"
+echo "3. Apache (Linux/macOS)"
+read -p "Enter your choice (1-3): " deploy_choice
+
+case $deploy_choice in
+    1)
+        export FLASK_APP=$project_name/app.py
+        export FLASK_ENV=development
+        flask run
+        ;;
+    2)
+        uwsgi --ini uwsgi.ini
+        ;;
+    3)
+        echo "Deploying with Apache..."
+        if [ "$os_name" = "Linux" ]; then
+            # For Debian/Ubuntu-based systems
+            if [ -d "/etc/apache2" ]; then
+                if [ -w "/etc/apache2/sites-available/" ]; then
+                    sudo cp apache_config.conf /etc/apache2/sites-available/${project_name}.conf
+                    sudo a2ensite ${project_name}.conf
+                    sudo systemctl restart apache2
+                    echo "Apache configuration completed successfully!"
+                else
+                    echo "Requesting sudo privileges to configure Apache..."
+                    if sudo -v; then
+                        sudo cp apache_config.conf /etc/apache2/sites-available/${project_name}.conf
+                        sudo a2ensite ${project_name}.conf
+                        sudo systemctl restart apache2
+                        echo "Apache configuration completed successfully!"
+                    else
+                        echo "Failed to get sudo privileges"
+                        echo "Please run the following commands manually:"
+                        echo "sudo cp apache_config.conf /etc/apache2/sites-available/${project_name}.conf"
+                        echo "sudo a2ensite ${project_name}.conf"
+                        echo "sudo systemctl restart apache2"
+                    fi
+                fi
+            # For RHEL/CentOS-based systems
+            elif [ -d "/etc/httpd" ]; then
+                if [ -w "/etc/httpd/conf.d/" ]; then
+                    sudo cp apache_config.conf /etc/httpd/conf.d/${project_name}.conf
+                    sudo systemctl restart httpd
+                    echo "Apache configuration completed successfully!"
+                else
+                    echo "Requesting sudo privileges to configure Apache..."
+                    if sudo -v; then
+                        sudo cp apache_config.conf /etc/httpd/conf.d/${project_name}.conf
+                        sudo systemctl restart httpd
+                        echo "Apache configuration completed successfully!"
+                    else
+                        echo "Failed to get sudo privileges"
+                        echo "Please run the following commands manually:"
+                        echo "sudo cp apache_config.conf /etc/httpd/conf.d/${project_name}.conf"
+                        echo "sudo systemctl restart httpd"
+                    fi
+                fi
+            fi
+        elif [ "$os_name" = "Darwin" ]; then
+            # For macOS
+            if [ -d "/etc/apache2" ]; then
+                if [ -w "/etc/apache2/other/" ]; then
+                    sudo cp apache_config.conf /etc/apache2/other/${project_name}.conf
+                    sudo apachectl restart
+                    echo "Apache configuration completed successfully!"
+                else
+                    echo "Requesting sudo privileges to configure Apache..."
+                    if sudo -v; then
+                        sudo cp apache_config.conf /etc/apache2/other/${project_name}.conf
+                        sudo apachectl restart
+                        echo "Apache configuration completed successfully!"
+                    else
+                        echo "Failed to get sudo privileges"
+                        echo "Please run the following commands manually:"
+                        echo "sudo cp apache_config.conf /etc/apache2/other/${project_name}.conf"
+                        echo "sudo apachectl restart"
+                    fi
+                fi
+            fi
+        else
+            echo "Unsupported operating system for Apache deployment"
+            echo "Please configure Apache manually according to your system"
+        fi
+        ;;
+    *)
+        echo "Invalid choice"
+        exit 1
+        ;;
+esac
+</code></pre>
+
+                        <div class="mt-4">
+                            <h5>Usage</h5>
+                            <ol>
+                                <li>Save the script to a file (e.g., <code>create_flask_project.sh</code>)</li>
+                                <li>Make it executable: <code>chmod +x create_flask_project.sh</code></li>
+                                <li>Run: <code>./create_flask_project.sh</code></li>
+                                <li>Follow the prompts to set up your project</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container">
+            <p class="text-center mb-0">&copy; 2024 Flask Project Generator</p>
+        </div>
+    </footer>
+   <script src="static/scripts/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>
