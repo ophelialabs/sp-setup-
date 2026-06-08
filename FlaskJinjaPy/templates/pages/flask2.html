@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS for professional styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 40px 32px;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        pre, code {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 1em;
+        }
+        .feature-list li {
+            margin-bottom: 0.5em;
+        }
+        .project-structure {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            font-size: 1em;
+        }
+        .section-title {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 6px;
+            margin-bottom: 18px;
+        }
+        .license {
+            font-size: 0.95em;
+            color: #6c757d;
+        }
+        .code-scroll {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/pipeline/flask/flask.html">Oph Logo</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="/pipeline/flask/generator.html">Generator</a>
+                <a class="nav-link" href="#download">Download</a>
+                <a class="nav-link" href="https://flask.palletsprojects.com/en/stable/" target="_blank" rel="noopener noreferrer">Docs</a>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <p class="lead">Flask is a Python project that demonstrates how to build web applications using <a href="https://flask.palletsprojects.com/" target="_blank">Flask</a> and <a href="https://jinja.palletsprojects.com/" target="_blank">Jinja2</a>.</p>
+
+    <h2 class="section-title">Best Use Cases</h2>
+    <ul class="feature-list">
+        <li><strong>Learning Flask and Jinja2:</strong> Straightforward, well-documented codebase for beginners to grasp web development fundamentals in Python.</li>
+        <li><strong>Prototyping Web Applications:</strong> Minimal setup lets you quickly spin up working web apps for testing ideas or proof-of-concept projects.</li>
+        <li><strong>Small to Medium Projects:</strong> Modular structure suitable for personal projects, internal tools, or MVPs, allowing easy growth.</li>
+        <li><strong>Template Customization:</strong> Jinja2 enables reusable components, custom filters, and clean separation of logic and presentation.</li>
+        <li><strong>Educational and Teaching Tool:</strong> Practical resource for instructors and students in workshops, tutorials, or classrooms.</li>
+    </ul>
+    <p>This project provides a solid foundation for building web applications that require dynamic content, user interaction, and maintainable code.</p>
+
+    <h2 class="section-title">Example Use Cases &amp; Related Technologies</h2>
+    <ul class="feature-list">
+        <li><strong>Personal Portfolio Website:</strong> Dynamic portfolio with routes for projects and blog posts, rendered from Python data or a database.</li>
+        <li><strong>Internal Dashboards:</strong> Team dashboards for analytics or server status, integrating APIs and interactive charts (e.g., Chart.js).</li>
+        <li><strong>Event Registration Forms:</strong> Registration pages with form handling and feedback using Flask and Jinja2.</li>
+        <li><strong>API Prototyping:</strong> Quickly prototype RESTful APIs and test behaviors before full-scale development.</li>
+        <li><strong>Educational Demos:</strong> Demonstrate authentication, template inheritance, or form validation in a classroom setting.</li>
+    </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Flask Extensions</h5>
+            <ul>
+                <li>Flask-WTF: Form creation &amp; validation</li>
+                <li>Flask-Login: User authentication</li>
+                <li>Flask-SQLAlchemy: SQL database integration</li>
+            </ul>
+            <h5>Front-End Libraries</h5>
+            <ul>
+                <li>Bootstrap, Tailwind CSS: Styling &amp; responsiveness</li>
+                <li>Alpine.js, Vanilla JS: Interactivity</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h5>Testing Tools</h5>
+            <ul>
+                <li>pytest, unittest: Automated route &amp; logic testing</li>
+            </ul>
+            <h5>Deployment Platforms</h5>
+            <ul>
+                <li>Heroku, PythonAnywhere, Docker: Cloud/container deployment</li>
+            </ul>
+            <h5>Database Backends</h5>
+            <ul>
+                <li>SQLite: Lightweight, file-based</li>
+                <li>PostgreSQL, MySQL: Production-ready, scalable</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="section-title">Features</h2>
+    <ul class="feature-list">
+        <li>Lightweight Flask web server</li>
+        <li>Jinja2 templating for dynamic HTML</li>
+        <li>Easy to extend and customize</li>
+        <li>Live Reload</li>
+    </ul>
+
+    <h2 class="section-title">Getting Started</h2>
+    <p>
+        <a href="https://github.com/authlib/example-oauth2-server/tree/master" target="_blank">Reference: Authlib OAuth2 Example</a>
+    </p>
+    <ol>
+        <li>
+            <strong>Clone the repository:</strong>
+            <pre><code>git clone https://github.com/jlabclouds/Flask.git
+cd Flask</code></pre>
+        </li>
+        <li>
+            <strong>Install dependencies:</strong>
+            <pre><code>pip install -r requirements.txt</code></pre>
+        </li>
+        <li>
+            <strong>Set Flask and Authlib environment variables</strong>
+            <pre><code># DO NOT SET THIS IN PRODUCTION!
+export AUTHLIB_INSECURE_TRANSPORT=1</code></pre>
+        </li>
+        <li>
+            <strong>Create Database and Run the application:</strong>
+            <pre><code>python app.py
+flask app __init__.py</code></pre>
+        </li>
+        <li>
+            <strong>Open your browser:</strong>
+            <br>
+            Visit <a href="http://localhost:5000" target="_blank">http://localhost:5000</a>
+        </li>
+        <li>
+            <strong>Access the API:</strong>
+            <pre><code>curl http://localhost:5000/api</code></pre>
+            <p>Check the API response in your terminal.</p>
+        </li>
+        <li>
+            <strong>From Scratch</strong>
+            <pre><code>mkdir my_flask_app
+cd ~/my_flask_app
+python -m venv .venv
+source .venv/bin/activate
+# Windows
+# .venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install PyQt6 PyQtWebEngine
+pip install -U huggingface_hub[cli,torch,tensorflow]
+pip install --upgrade tensorflow
+# Current stable release for GPU (Linux / WSL2)
+pip install tensorflow[and-cuda]
+
+# Create requirements.txt
+cat &lt;&lt;EOF | sudo tee /my_flask_app/requirements.txt
+Flask&gt;=3.0.3
+Flask-SQLAlchemy
+Authlib
+EOF
+
+# Create main.py, runserver.py
+cat &lt;&lt;EOF | sudo tee /my_flask_app/main.py
+import os
+import flask
+EOF
+
+python -m pip install -r requirements.txt</code></pre>
+        </li>
+        <li>
+            <strong>Passwd flow example</strong>
+            <ul>
+                <li>Get client_id and client_secret</li>
+            </ul>
+            <pre><code>curl -u ${client_id}:${client_secret} -XPOST http://127.0.0.1:5000/oauth/token -F grant_type=password -F username=${username} -F password=valid -F scope=profile</code></pre>
+            <ul>
+                <li>Note password=valid</li>
+            </ul>
+            <pre><code>curl -H "Authorization: Bearer ${access_token}" http://127.0.0.1:5000/api/me</code></pre>
+            <ul>
+                <li>Grant Auth, send code to Auth server to get access token</li>
+            </ul>
+            <pre><code>curl -u ${client_id}:${client_secret} -XPOST http://127.0.0.1:5000/oauth/token -F grant_type=authorization_code -F scope=profile -F code=${code}</code></pre>
+            <pre><code>curl -H "Authorization: Bearer ${access_token}" http://127.0.0.1:5000/api/me</code></pre>
+        </li>
+        <li>
+            <strong>Auth flow example</strong>
+            <ul>
+                <li>Test the auth code flow</li>
+            </ul>
+            <pre><code>open http://127.0.0.1:5000/oauth/authorize?response_type=code&amp;client_id=${client_id}&amp;scope=profile</code></pre>
+        </li>
+    </ol>
+
+    <h2 class="section-title">Project Structure</h2>
+    <div class="project-structure mb-3">
+<pre>
+Flask/
+├── app.py
+├── templates/
+│   └── index.html
+├── static/
+├── requirements.txt
+└── README.md
+</pre>
+    </div>
+
+    <h2 class="section-title">Virtual Environment &amp; Package Setup</h2>
+    <div class="code-scroll mb-4">
+<pre>
+# Virtual Environment Setup
+python -m venv venv
+source venv/bin/activate
+
+# Essential Packages
+pip install flask>=3.0.3
+opentelemetry-distro                       
+pip install python-dotenv
+pip install pytest
+pip install gunicorn
+pip install uwsgi
+pip install mod_wsgi
+
+# Authentication & Security
+pip install flask-login
+pip install flask-security
+pip install PyJWT
+pip install flask-jwt-extended
+pip install passlib
+pip install bcrypt
+
+# ML/AI/Quantum Packages
+pip install torch torchvision
+pip install tensorflow
+pip install transformers
+pip install huggingface_hub[cli,torch,tensorflow]
+pip install scikit-learn
+pip install pandas numpy
+pip install qiskit
+pip install cirq
+pip install pennylane
+
+# Monitoring and Logging
+pip install prometheus_client
+pip install logging
+pip install sentry-sdk
+pip install elastic-apm
+opentelemetry-exporter-otlp-proto-grpc
+opentelemetry-instrumentation-flask 
+
+# Databases
+pip install sqlalchemy
+pip install flask-sqlalchemy
+pip install flask-migrate
+pip install redis
+pip install celery
+pip install cx_Oracle
+pip install oracle-db
+pip install psycopg2-binary
+pip install pymongo
+
+# Server Deployment
+pip install apache2-utils
+pip install mod_wsgi
+pip install supervisor
+
+flask run
+</pre>
+    </div>
+
+    <h2 class="section-title">License</h2>
+    <p class="license">This project is licensed under the MIT License.</p>
+</div>
+</body>
+</html>
