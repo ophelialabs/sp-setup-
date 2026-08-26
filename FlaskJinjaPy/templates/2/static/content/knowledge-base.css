@@ -1,0 +1,142 @@
+/* Best Practices Knowledge Base styles */
+.kb-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.kb-header {
+    background: linear-gradient(135deg, #2564cf 0%, #1e88e5 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0 0 12px 12px;
+}
+
+.kb-search {
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.kb-search input {
+    border: none;
+    border-radius: 24px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.kb-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.kb-category-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.kb-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.kb-category-icon {
+    width: 48px;
+    height: 48px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.kb-category-title {
+    color: #2564cf;
+    margin-bottom: 1rem;
+}
+
+.kb-article-list {
+    list-style: none;
+    padding: 0;
+}
+
+.kb-article-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.kb-article-item:last-child {
+    border-bottom: none;
+}
+
+.kb-metadata {
+    font-size: 0.875rem;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.kb-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #e9ecef;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    color: #495057;
+    margin: 0.25rem;
+}
+
+.kb-difficulty {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+}
+
+.kb-difficulty.beginner {
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.kb-difficulty.intermediate {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.kb-difficulty.advanced {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.kb-vote {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    background: #f8f9fa;
+    color: #495057;
+    font-size: 0.875rem;
+}
+
+.kb-toc {
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+}
+
+.kb-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1rem 0;
+}

@@ -1,0 +1,311 @@
+    <nav class="navbar navbar-expand-lg navbar-dark fluent-navbar bg-primary mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="static/assets/Gemini_Generated_logo.png" style="width: 48px; height: 48px;" />
+            </a>
+            
+
+            <!-- Search bar -->
+            <form class="d-flex mx-auto" style="width: 50%; position: relative;" role="search" onsubmit="return false;">
+                <input class="form-control" type="search" id="searchInput" placeholder="Search..." aria-label="Search">
+            </form>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="width: 24px; height: 24px;"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><h6 class="dropdown-header"><strong>Jobs</strong></h6></li>
+                            <li><a class="dropdown-item" href="https://swelist.com/">Swe list</a></li>
+                            <li><a class="dropdown-item" href="https://learn-anything.xyz/">Learn Anything</a></li>
+                            <li><hr class="dropdown-divider"></li>
+
+                            <li><h6 class="dropdown-header">Certs</h6></li>
+                            <li><a class="dropdown-item" href="../gcppca.html">GCPPCA</a></li>
+                            <li><a class="dropdown-item" href="../rhcsa.html">RHCSA</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Projects Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-folder me-1"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end py-0" style="min-width: 330px;">
+                            <div class="p-3">
+                                <h6 class="dropdown-header px-0 mb-2">Projects</h6>
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <a href="projects/enterprise.html" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-building text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Enterprise</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="projects/cloud.html" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Cloud</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="projects/security.html" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-shield-lock-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Security</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+
+                    <!-- Apps Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-grid me-1"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end py-0" style="min-width: 330px;">
+                            <div class="p-3">
+                                <h6 class="dropdown-header px-0 mb-2">Apps</h6>
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <a href="apps/saturn.html" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Saturn</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="apps/neptune.html" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-database text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Neptune</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="apps/pluto.html" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-shield-check text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Pluto</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+
+                    <!-- Github -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end py-0" style="min-width: 330px;">
+                            <div class="p-3">
+                                <h6 class="dropdown-header px-0 mb-2">GitHub Repositories</h6>
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <a href="https://github.com/jlabclouds" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-code-square text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">JLab</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://github.com/OpheliaLabs" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-code-branch text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Ophelia</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://github.com/IBM" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-git text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">IBM</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+
+                    <!-- Account -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-fill-lock"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end py-0" style="min-width: 330px;">
+                            <div class="p-3">
+                                <h6 class="dropdown-header px-0 mb-2">Account Access</h6>
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <a href="https://developers.redhat.com/products/rhel/download#publicandprivatecloudreadyrhelimages" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-globe text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Linux</div>
+                                            </div>
+                                        </a>
+                                    </div>                                    
+                                    <div class="col-4">
+                                        <a href="https://support.broadcom.com/web/ecx" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-globe text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Broadcom</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://www.oracle.com/cloud/sign-in.html" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-database-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Oracle</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://cloud.ibm.com/login" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cpu text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">IBM</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://portal.azure.com" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Azure</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://console.aws.amazon.com/" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Amazon</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://console.cloud.google.com/" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Google</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://account.servicenow.com/" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-gear-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">ServiceNow</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://www.atlassian.com" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-gear-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Atlassian</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://www.salesforce.com/" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Salesforce</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">InfoSec</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Workday</div>
+                                            </div>
+                                        </a>
+                                    </div>                                    
+                                    <h6 class="dropdown-header px-0 mb-2">Account Apps</h6>
+                                     <div class="row g-3">
+
+                                    <div class="col-4">
+                                        <a href="https://www.flocksafety.com/" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cpu text-primary mb-2" style="font-size: 1.5rem;"></i> // Flock Logo(https://cdn.prod.website-files.com/6821cc9ecc966b7f252b372e/682b0cbd11cc8b08424afe0f_Webclip%20or%20Apple%20Touch%20Icon.png)
+                                                <div class="small text-body-secondary">Flock</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://www.synology.com/en-us" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-globe text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Synology</div>
+                                            </div>
+                                        </a>
+                                    </div>                                                                            
+                                    <div class="col-4">
+                                        <a href="https://www.broadcom.com/info/aiops/dx-spectrum" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-globe text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">DX Spectrum</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-database-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Omnissa</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://www.okta.com/" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-cloud-arrow-up text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">Okta</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" target="_blank" class="text-decoration-none">
+                                            <div class="app-card p-2 rounded text-center">
+                                                <i class="bi bi-gear-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                                <div class="small text-body-secondary">.</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

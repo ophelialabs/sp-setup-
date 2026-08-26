@@ -1,0 +1,134 @@
+/* API Documentation specific styles */
+.api-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.api-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.api-method {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.api-method.get {
+    background: #e3f2fd;
+    color: #0d47a1;
+}
+
+.api-method.post {
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.api-method.put {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.api-method.delete {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.api-endpoint {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    margin: 0.5rem 0;
+}
+
+.api-params table {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.api-params th {
+    background: #f8f9fa;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.api-params td {
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.api-response {
+    background: #263238;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.api-response pre {
+    margin: 0;
+    color: #a8e6cf;
+}
+
+.api-auth {
+    background: #fff3e0;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.response-schema {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.required-badge {
+    background: #ffebee;
+    color: #b71c1c;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.optional-badge {
+    background: #f5f5f5;
+    color: #616161;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.api-version {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.deprecated-notice {
+    background: #ffebee;
+    color: #b71c1c;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.rate-limit-info {
+    background: #e8eaf6;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}

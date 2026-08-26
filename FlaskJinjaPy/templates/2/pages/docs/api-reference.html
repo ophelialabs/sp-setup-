@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Reference | Senior Engineering Portal</title>
+    <meta name="description" content="Complete API documentation for the Senior Engineering Portal">
+    <link rel="stylesheet" href="../../static/content/site.css">
+    <link rel="stylesheet" href="../../static/content/api.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="container-fluid mt-5 pt-4">
+        <div class="api-container">
+            <div class="row g-5">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <div class="api-sidebar">
+                        <div class="api-version">
+                            <strong>API Version:</strong> v2.0.0
+                        </div>
+                        <h6 class="text-muted mb-3">Authentication</h6>
+                        <nav class="nav nav-pills flex-column mb-4">
+                            <a class="nav-link" href="#auth">Authentication</a>
+                            <a class="nav-link" href="#oauth">OAuth 2.0</a>
+                            <a class="nav-link" href="#tokens">Access Tokens</a>
+                        </nav>
+
+                        <h6 class="text-muted mb-3">Endpoints</h6>
+                        <nav class="nav nav-pills flex-column">
+                            <a class="nav-link" href="#users">Users</a>
+                            <a class="nav-link" href="#projects">Projects</a>
+                            <a class="nav-link" href="#analytics">Analytics</a>
+                        </nav>
+
+                        <h6 class="text-muted mb-3 mt-4">Resources</h6>
+                        <nav class="nav nav-pills flex-column">
+                            <a class="nav-link" href="https://ophelialabs.github.io/jb./api/">APIs</a>
+                            <a class="nav-link" href="#errors">Error Codes</a>
+                            <a class="nav-link" href="#rate-limits">Rate Limits</a>
+                            <a class="nav-link" href="#webhooks">Webhooks</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <h1>API Reference</h1>
+                    <p class="lead">Complete documentation for the Senior Engineering Portal API.</p>
+
+                    <!-- Authentication Section -->
+                    <section id="auth" class="mb-5">
+                        <h2>Authentication</h2>
+                        <div class="api-auth">
+                            <h5>API Key Authentication</h5>
+                            <p>Include your API key in the header of each request:</p>
+                            <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+                        </div>
+                    </section>
+
+                    <!-- Users Endpoints -->
+                    <section id="users" class="mb-5">
+                        <h2>Users API</h2>
+
+                        <!-- Get User -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3>
+                                    <span class="api-method get">GET</span>
+                                    <span class="api-endpoint">/api/v2/users/{id}</span>
+                                </h3>
+                                
+                                <p>Retrieve a user by their ID.</p>
+
+                                <h4>Parameters</h4>
+                                <div class="api-params">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>id<span class="required-badge">Required</span></td>
+                                                <td>string</td>
+                                                <td>The unique identifier of the user</td>
+                                            </tr>
+                                            <tr>
+                                                <td>fields<span class="optional-badge">Optional</span></td>
+                                                <td>string[]</td>
+                                                <td>Comma-separated list of fields to include</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h4>Response</h4>
+                                <div class="api-response">
+                                    <pre>{
+  "id": "usr_123",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "created_at": "2025-08-25T00:00:00Z",
+  "role": "admin"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Create User -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3>
+                                    <span class="api-method post">POST</span>
+                                    <span class="api-endpoint">/api/v2/users</span>
+                                </h3>
+                                
+                                <p>Create a new user.</p>
+
+                                <h4>Request Body</h4>
+                                <div class="response-schema">
+                                    <pre>{
+  "name": "string",
+  "email": "string",
+  "role": "string",
+  "settings": {
+    "theme": "light|dark",
+    "notifications": boolean
+  }
+}</pre>
+                                </div>
+
+                                <h4>Response</h4>
+                                <div class="api-response">
+                                    <pre>{
+  "id": "usr_123",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "created_at": "2025-08-25T00:00:00Z",
+  "role": "admin"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Rate Limits -->
+                    <section id="rate-limits" class="mb-5">
+                        <h2>Rate Limits</h2>
+                        <div class="rate-limit-info">
+                            <h5>Rate Limiting</h5>
+                            <p>Our API implements rate limiting to ensure fair usage:</p>
+                            <ul>
+                                <li>Free tier: 100 requests per minute</li>
+                                <li>Pro tier: 1000 requests per minute</li>
+                                <li>Enterprise tier: Custom limits</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Error Codes -->
+                    <section id="errors" class="mb-5">
+                        <h2>Error Codes</h2>
+                        <div class="api-params">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>400</td>
+                                        <td>Bad Request - Invalid parameters</td>
+                                    </tr>
+                                    <tr>
+                                        <td>401</td>
+                                        <td>Unauthorized - Invalid API key</td>
+                                    </tr>
+                                    <tr>
+                                        <td>403</td>
+                                        <td>Forbidden - Insufficient permissions</td>
+                                    </tr>
+                                    <tr>
+                                        <td>404</td>
+                                        <td>Not Found - Resource doesn't exist</td>
+                                    </tr>
+                                    <tr>
+                                        <td>429</td>
+                                        <td>Too Many Requests - Rate limit exceeded</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/scripts/site.js"></script>
+</body>
+</html>

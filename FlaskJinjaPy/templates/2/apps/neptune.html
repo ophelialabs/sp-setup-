@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Fleet Manager Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; color: #f1f5f9; margin: 0; padding: 0; }
+        .dashboard-container { max-width: 1200px; margin: 2rem auto; padding: 2rem; background: #1e293b; border-radius: 16px; box-shadow: 0 8px 32px rgba(59,130,246,0.18); }
+        .table { width: 100%; border-collapse: collapse; margin-top: 2rem; background: #1e293b; border-radius: 12px; overflow: hidden; }
+        .table th, .table td { padding: 0.9rem 1rem; border-bottom: 1px solid #334155; }
+        .table th { background: #334155; color: #a5b4fc; }
+        .table tr:last-child td { border-bottom: none; }
+        .stats-cards { margin-bottom: 2rem; }
+        .card { margin-bottom: 1.5rem; }
+        ul { margin: 0; padding-left: 1.2rem; }
+        h2, h3 { color: #60a5fa; }
+        a { color: #60a5fa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+   <div class="dashboard-container">
+
+        <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 2.5rem;">
+            <!-- Map Section -->
+            <div class="map-placeholder" style="flex: 2;">
+                <div style="margin-bottom: 1rem;">
+                    <input
+                        type="text"
+                        id="location-search"
+                        placeholder="Enter a location..."
+                        style="width: 70%; padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #f1f5f9; font-size: 1rem;"
+                    />
+                    <button
+                        id="search-btn"
+                        style="padding: 0.6rem 1.2rem; border-radius: 8px; border: none; background: #60a5fa; color: #fff; font-size: 1rem; cursor: pointer;"
+                    >
+                        Search
+                    </button>
+                </div>
+                <script>
+                    function updateMapWithLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                var lat = position.coords.latitude;
+                                var lng = position.coords.longitude;
+                                var iframe = document.getElementById('user-map');
+                                iframe.src = `https://www.google.com/maps/embed/v1/view?key=AIzaSyDK7BXtZz4ypjq0yr-7FrrAcl3oCoPpxK8&center=${lat},${lng}&zoom=12`;
+                            });
+                        }
+                    }
+                    window.onload = updateMapWithLocation;
+
+                    document.getElementById('search-btn').onclick = function() {
+                        var location = document.getElementById('location-search').value.trim();
+                        if (location) {
+                            var iframe = document.getElementById('user-map');
+                            iframe.src = `https://www.google.com/maps/embed/v1/search?key=AIzaSyDK7BXtZz4ypjq0yr-7FrrAcl3oCoPpxK8&q=${encodeURIComponent(location)}&zoom=12`;
+                        }
+                    };
+
+                    document.getElementById('location-search').addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            document.getElementById('search-btn').click();
+                        }
+                    });
+                </script>
+                <iframe
+                    id="user-map"
+                    width="100%"
+                    height="400"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDK7BXtZz4ypjq0yr-7FrrAcl3oCoPpxK8&center=37.7749,-122.4194&zoom=10"
+                    allowfullscreen>
+                </iframe>
+                <p style="color: #64748b; font-size: 1rem; margin: 0;">
+                    This map is a placeholder. In the future, robot locations and sensor info will be displayed here.
+                </p>
+            </div>
+
+            <!-- Alerts Popup Section -->
+            <div style="
+                flex: 1;
+                position: relative;
+                min-width: 320px;
+                max-width: 400px;
+            ">
+                <div style="
+                    position: sticky;
+                    top: 2rem;
+                    z-index: 10;
+                    background: rgba(30,41,59,0.98);
+                    border-radius: 16px;
+                    box-shadow: 0 8px 32px rgba(59,130,246,0.18);
+                    border: 1px solid rgba(255,255,255,0.10);
+                    padding: 1.5rem 1.2rem;
+                    min-height: 120px;
+                ">
+                    <h2 style="margin-top:0; margin-bottom:1rem;">Fleet Alerts & Notifications</h2>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li style="margin-bottom:1.2rem;">
+                            <div style="
+                                background: rgba(220,38,38,0.12);
+                                border-left: 5px solid #ef4444;
+                                border-radius: 12px;
+                                padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+                                box-shadow: 0 2px 12px rgba(59,130,246,0.08);
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 1rem;">
+                                <span style="font-size:1.5rem; color:#ef4444; margin-top:2px;">&#9888;</span>
+                                <div>
+                                    <div style="font-weight:700; color:#f1f5f9; font-size:1.08rem;">
+                                        Low Battery
+                                    </div>
+                                    <div style="color:#e0e7ef; margin:0.2rem 0 0.4rem 0;">
+                                        Robot Atlas battery below 20%.
+                                    </div>
+                                    <div style="font-size:0.93rem; color:#64748b;">
+                                        6/10/2024 2:30 PM
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li style="margin-bottom:1.2rem;">
+                            <div style="
+                                background: rgba(220,38,38,0.12);
+                                border-left: 5px solid #ef4444;
+                                border-radius: 12px;
+                                padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+                                box-shadow: 0 2px 12px rgba(59,130,246,0.08);
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 1rem;">
+                                <span style="font-size:1.5rem; color:#ef4444; margin-top:2px;">&#9888;</span>
+                                <div>
+                                    <div style="font-weight:700; color:#f1f5f9; font-size:1.08rem;">
+                                        Maintenance Required
+                                    </div>
+                                    <div style="color:#e0e7ef; margin:0.2rem 0 0.4rem 0;">
+                                        Robot Spot scheduled for maintenance.
+                                    </div>
+                                    <div style="font-size:0.93rem; color:#64748b;">
+                                        6/10/2024 1:00 PM
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li style="margin-bottom:1.2rem;">
+                            <div style="
+                                background: rgba(220,38,38,0.12);
+                                border-left: 5px solid #ef4444;
+                                border-radius: 12px;
+                                padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+                                box-shadow: 0 2px 12px rgba(59,130,246,0.08);
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 1rem;">
+                                <span style="font-size:1.5rem; color:#ef4444; margin-top:2px;">&#9888;</span>
+                                <div>
+                                    <div style="font-weight:700; color:#f1f5f9; font-size:1.08rem;">
+                                        Sensor Malfunction
+                                    </div>
+                                    <div style="color:#e0e7ef; margin:0.2rem 0 0.4rem 0;">
+                                        Robot Pepper sensor malfunction detected.
+                                    </div>
+                                    <div style="font-size:0.93rem; color:#64748b;">
+                                        6/10/2024 2:50 PM
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards Section -->
+        <div class="stats-cards" style="flex: 1;"></div>
+            <div class="card" style="background: rgba(59,130,246,0.12); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(59,130,246,0.10);"></div>
+                <h3 style="margin-top: 0; margin-bottom: 1rem;">Fleet Statistics</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;"></ul>
+                    <li style="margin-bottom: 0.5rem;">Total Robots: <strong>4</strong></li>
+                    <li style="margin-bottom: 0.5rem;">Active Robots: <strong>2</strong></li>
+                    <li style="margin-bottom: 0.5rem;">Inactive Robots: <strong>1</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Robot Fleet Overview</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Robot ID</th>
+                    <th>Model</th>
+                    <th>Status</th>
+                    <th>Last Maintenance</th>
+                    <th>Battery Level (%)</th>
+                    <th>Location</th>
+                    <th>Sensors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Robot ID">101</td>
+                    <td data-label="Model"><a href="https://webots.cloud/run?url=https://github.com/cyberbotics/webots/blob/released/projects/robots/boston_dynamics/atlas/protos/Atlas.proto" target="_blank" rel="noopener noreferrer">Atlas</a></td>
+                    <td data-label="Status">Active</td>
+                    <td data-label="Last Maintenance">5/26/2024</td>
+                    <td data-label="Battery Level (%)">85</td>
+                    <td data-label="Location">Warehouse A</td>
+                    <td data-label="Sensors">
+                        <ul>
+                            <li>Temperature: 36°C</li>
+                            <li>Proximity: Clear</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="Robot ID">102</td>
+                    <td data-label="Model">Spot</td>
+                    <td data-label="Status">Maintenance</td>
+                    <td data-label="Last Maintenance">6/5/2024</td>
+                    <td data-label="Battery Level (%)">60</td>
+                    <td data-label="Location">Workshop</td>
+                    <td data-label="Sensors">
+                        <ul>
+                            <li>Temperature: 40°C</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="Robot ID">103</td>
+                    <td data-label="Model">Pepper</td>
+                    <td data-label="Status">Active</td>
+                    <td data-label="Last Maintenance">5/21/2024</td>
+                    <td data-label="Battery Level (%)">90</td>
+                    <td data-label="Location">Lobby</td>
+                    <td data-label="Sensors">
+                        <ul>
+                            <li>Humidity: 45%</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="Robot ID">104</td>
+                    <td data-label="Model">Nao</td>
+                    <td data-label="Status">Inactive</td>
+                    <td data-label="Last Maintenance">5/1/2024</td>
+                    <td data-label="Battery Level (%)">40</td>
+                    <td data-label="Location">Storage</td>
+                    <td data-label="Sensors">
+                        <span>No Data</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

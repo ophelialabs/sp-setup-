@@ -1,0 +1,8 @@
+- Use JSON for Country IDs until API is created, utilized.
+- Easy, Medium, Hard selections for front-facing.
+- Rewrite for mobile-friendliness
+- Utilize tools and bring info together
+- Use other Account for seperation, and upcoming model training implementation
+- MAF, Azure to prevent AI segmentation for github?  
+- [MAF](https://docs.copilotkit.ai/microsoft-agent-framework)/[Azure Maps](https://azure.microsoft.com/en-us/products/azure-maps/)/[API](https://developers.google.com/maps/documentation/javascript/examples/map-drawing-terradraw#maps_map_drawing_terradraw-javascript) 
+- [Strands](https://docs.copilotkit.ai/aws-strands)/[Dash](https://ophelialabs.github.io/a/pages/legacy/site-old/Components/Pages/dashboard.html)/[Google Earth](https://earth.google.com/web/)/[API](https://developers.google.com/maps/documentation/javascript/examples/map-drawing-terradraw)

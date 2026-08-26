@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globe-ChessAdv</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #1e293b; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+        #globe-container { width: 75vw; height: 75vh; }
+        .alerts-section { flex: 1; position: relative; width: 100%; }
+        .alerts-popup { position: sticky; top: 2rem; z-index: 10; background: rgba(30,41,59,0.98); border-radius: 16px; box-shadow: 0 8px 32px rgba(59,130,246,0.18); border: 1px solid rgba(255,255,255,0.10); padding: 1.5rem 1.2rem; min-height: 120px; }
+        .alert-list { list-style: none; padding: 0; margin: 0; }
+        .alert-item { margin-bottom: 1.2rem; }
+        .alert-content { background: rgba(220,38,38,0.12); border-left: 5px solid #ef4444; border-radius: 12px; padding: 1.2rem 1.2rem 1.2rem 1.5rem; box-shadow: 0 2px 12px rgba(59,130,246,0.08); display: flex; align-items: flex-start; gap: 1rem; }
+        .alert-icon { font-size: 1.5rem; color: #ef4444; margin-top: 2px; }
+        .alert-title { font-weight: 700; color: #f1f5f9; font-size: 1.08rem; }
+        .alert-message { color: #e0e7ef; margin: 0.2rem 0 0.4rem 0; }
+        .alert-timestamp { font-size: 0.93rem; color: #64748b; }
+        .no-alerts { background: rgba(59,130,246,0.10); border-radius: 12px; padding: 1.2rem 1.2rem; color: #a5b4fc; text-align: center; }
+        .chess-controls { margin-bottom: 1rem; }
+        .chess-controls button { margin-right: 0.5rem; }
+        .alert-category { font-size: 1.1rem; font-weight: bold; margin: 1.2rem 0 0.5rem 0; color: #fbbf24; }
+        .alert-category.critical { color: #ef4444; }
+        .alert-category.high { color: #f59e42; }
+        .alert-category.medium { color: #38bdf8; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand">Globe</a>
+        </div>
+    </nav>
+    <h1 style="margin-top: 4rem;">Globe</h1>
+
+    <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 2.5rem;">
+        <!-- Map Section -->
+        <div class="map-placeholder" style="flex: 2;">
+            <div class="chess-controls">
+                <button id="reset-btn" class="btn btn-primary btn-sm">Reset Game</button>
+                <button id="move-btn" class="btn btn-success btn-sm">Make Random Move</button>
+            </div>
+            <div id="globe-container"></div>
+        </div>
+        <!-- Alerts Popup Section -->
+        <div class="alerts-section" style="max-width: 400px;">
+            <div class="alerts-popup">
+                <h2 style="margin-top:0; margin-bottom:1rem;">Strategic Alerts</h2>
+                <p>Must be up with Current Events</p>
+                <p>Must be dynamic (location based), America Loc=Am King, Britain Loc=UK King</p>
+                <div id="alert-list"></div>
+                <div class="no-alerts" id="no-alerts">
+                    No urgent locations at this time.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Maps JS API Loader -->
+    <script>
+        (g => {
+            var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+            b = b[c] || (b[c] = {});
+            var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {
+                await (a = m.createElement("script"));
+                e.set("libraries", [...r] + "");
+                for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+                e.set("callback", c + ".maps." + q);
+                a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+                d[q] = f;
+                a.onerror = () => h = n(Error(p + " could not load."));
+                a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+                m.head.append(a)
+            }));
+            d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+        })({
+            key: "AIzaSyDK7BXtZz4ypjq0yr-7FrrAcl3oCoPpxK8",
+            v: "alpha"
+        });
+    </script>
+    <script>
+        // Countries, alliances, and regions
+        const countryLocations = [
+            { name: "United States", lat: 39.8283, lng: -98.5795, event: "Home base", severity: "Critical", side: "us", region: "Americas" },
+            { name: "United Kingdom", lat: 55.3781, lng: -3.4360, event: "NATO Ally", severity: "High", side: "ally", region: "Europe" },
+            { name: "France", lat: 46.6034, lng: 1.8883, event: "NATO Ally", severity: "High", side: "ally", region: "Europe" },
+            { name: "Germany", lat: 51.1657, lng: 10.4515, event: "NATO Ally", severity: "High", side: "ally", region: "Europe" },
+            { name: "Japan", lat: 36.2048, lng: 138.2529, event: "Strategic Ally", severity: "High", side: "ally", region: "Asia" },
+            { name: "South Korea", lat: 35.9078, lng: 127.7669, event: "Strategic Ally", severity: "Medium", side: "ally", region: "Asia" },
+            { name: "Ukraine", lat: 48.3794, lng: 31.1656, event: "Ongoing conflict", severity: "Critical", side: "ally", region: "Europe" },
+            { name: "Israel", lat: 31.0461, lng: 34.8516, event: "Security tensions", severity: "High", side: "ally", region: "Middle East" },
+            { name: "Taiwan", lat: 23.6978, lng: 120.9605, event: "Regional tensions", severity: "Medium", side: "ally", region: "Asia" },
+            { name: "Russia", lat: 61.5240, lng: 105.3188, event: "Sanctions & conflict", severity: "Critical", side: "opponent", region: "Europe" },
+            { name: "China", lat: 35.8617, lng: 104.1954, event: "Strategic competitor", severity: "Critical", side: "opponent", region: "Asia" },
+            { name: "Iran", lat: 32.4279, lng: 53.6880, event: "Protests & sanctions", severity: "High", side: "opponent", region: "Middle East" },
+            { name: "North Korea", lat: 40.3399, lng: 127.5101, event: "Nuclear threat", severity: "High", side: "opponent", region: "Asia" },
+            { name: "Venezuela", lat: 6.4238, lng: -66.5897, event: "Economic crisis", severity: "Medium", side: "opponent", region: "Americas" },
+            { name: "Sudan", lat: 12.8628, lng: 30.2176, event: "Civil unrest", severity: "Medium", side: "neutral", region: "Africa" },
+            { name: "Myanmar", lat: 21.9162, lng: 95.9560, event: "Political crisis", severity: "Medium", side: "neutral", region: "Asia" },
+            { name: "Haiti", lat: 18.9712, lng: -72.2852, event: "Gang violence", severity: "Medium", side: "neutral", region: "Americas" },
+            { name: "Gaza", lat: 31.5, lng: 34.47, event: "Humanitarian crisis", severity: "High", side: "neutral", region: "Middle East" }
+        ];
+
+        // Simulate urgent countries based on current events
+        let urgentLocations = countryLocations
+            .filter(c => c.severity === "Critical" || c.severity === "High")
+            .map(c => ({
+                name: c.name,
+                reason: c.event,
+                severity: c.severity,
+                side: c.side,
+                time: new Date()
+
+            }));
+
+        // Store marker references
+        let countryMarkers = [];
+        let regionClusters = {};
+
+        window.map3D = null;
+
+        async function init() {
+            // Ensure Google Maps API is ready
+            if (typeof google === 'undefined' || !google.maps) {
+                setTimeout(init, 100);
+                return;
+            }
+            
+            const { Map3DElement, MapMode, Marker3DInteractiveElement } = await google.maps.importLibrary("maps3d");
+            const { PinElement } = await google.maps.importLibrary('marker');
+
+            window.map3D = new Map3DElement({
+                mode: MapMode.HYBRID,
+            });
+
+            // Group countries by region for clustering
+            regionClusters = {};
+            countryLocations.forEach(loc => {
+                if (!regionClusters[loc.region]) regionClusters[loc.region] = [];
+                regionClusters[loc.region].push(loc);
+            });
+
+            // Place region cluster markers
+            Object.entries(regionClusters).forEach(([region, countries]) => {
+                // Compute cluster center
+                const avgLat = countries.reduce((sum, c) => sum + c.lat, 0) / countries.length;
+                const avgLng = countries.reduce((sum, c) => sum + c.lng, 0) / countries.length;
+
+                // Cluster marker
+                const clusterMarker = new Marker3DInteractiveElement({
+                    position: { lat: avgLat, lng: avgLng, altitude: 120 },
+                    label: region,
+                    altitudeMode: 'ABSOLUTE',
+                    extruded: true,
+                });
+
+                // Custom pin for cluster
+                const pin = new PinElement({
+                    background: "#2563eb",
+                    glyph: "♟",
+                    scale: 1.7,
+                    glyphColor: "#fff"
+                });
+                clusterMarker.append(pin);
+
+                clusterMarker.addEventListener('gmp-click', (event) => {
+                    map3D.flyCameraTo({
+                        endCamera: {
+                            center: clusterMarker.position,
+                            tilt: 65,
+                            range: 2200,
+                            heading: 0,
+                        },
+                        durationMillis: 2000,
+                    });
+                    alert(`Region: ${region}\nCountries: ${countries.map(c => c.name).join(", ")}`);
+                    event.stopPropagation();
+                });
+
+                map3D.append(clusterMarker);
+            });
+
+            // Place individual country markers
+            countryMarkers = countryLocations.map(loc => {
+                const marker = new Marker3DInteractiveElement({
+                    position: { lat: loc.lat, lng: loc.lng, altitude: 75 },
+                    label: loc.name,
+                    altitudeMode: 'ABSOLUTE',
+                    extruded: true,
+                });
+
+                // Custom pin for country
+                let background, glyph;
+                if (loc.side === "us") {
+                    background = "#2563eb"; glyph = "★";
+                } else if (loc.side === "ally") {
+                    background = "#22c55e"; glyph = "♙";
+                } else if (loc.side === "opponent") {
+                    background = "#dc2626"; glyph = "♜";
+                } else {
+                    background = "#fbbf24"; glyph = "●";
+                }
+
+                const pin = new PinElement({
+                    background,
+                    glyph,
+                    scale: 1.3,
+                    glyphColor: "#fff"
+                });
+                marker.append(pin);
+
+                marker.addEventListener('gmp-click', (event) => {
+                    map3D.flyCameraTo({
+                        endCamera: {
+                            center: marker.position,
+                            tilt: 65,
+                            range: 1200,
+                            heading: 0,
+                        },
+                        durationMillis: 2500,
+                    });
+                    alert(`${loc.name} (${loc.side === "us" ? "USA" : loc.side === "ally" ? "Ally" : loc.side === "opponent" ? "Opponent" : "Neutral"}): ${loc.event}`);
+                    event.stopPropagation();
+                });
+
+                map3D.append(marker);
+                return marker;
+            });
+
+            // Add the globe to the container
+            document.getElementById('globe-container').append(map3D);
+
+            updateAlerts();
+        }
+
+        // Update the alerts section based on urgentLocations, categorized
+        function updateAlerts() {
+            const alertList = document.getElementById('alert-list');
+            const noAlerts = document.getElementById('no-alerts');
+            alertList.innerHTML = '';
+
+            // Categorize alerts
+            const categories = {
+                Critical: [],
+                High: [],
+                Medium: []
+            };
+            urgentLocations.forEach(alert => {
+                categories[alert.severity]?.push(alert);
+            });
+
+            let hasAlerts = false;
+            for (const [cat, alerts] of Object.entries(categories)) {
+                if (alerts.length > 0) {
+                    hasAlerts = true;
+                    const catDiv = document.createElement('div');
+                    catDiv.className = `alert-category ${cat.toLowerCase()}`;
+                    catDiv.textContent = cat + " Importance";
+                    alertList.appendChild(catDiv);
+
+                    alerts.forEach(alert => {
+                        const li = document.createElement('li');
+                        li.className = 'alert-item';
+                        let icon = alert.severity === "Critical" ? "&#9888;" : alert.severity === "High" ? "&#128308;" : "&#128994;";
+                        let borderColor = alert.severity === "Critical" ? "#ef4444" : alert.severity === "High" ? "#f59e42" : "#38bdf8";
+                        li.innerHTML = `
+                            <div class="alert-content" style="border-left-color:${borderColor}">
+                                <span class="alert-icon">${icon}</span>
+                                <div>
+                                    <div class="alert-title">${alert.name} (${alert.side === "us" ? "USA" : alert.side === "ally" ? "Ally" : alert.side === "opponent" ? "Opponent" : "Neutral"})</div>
+                                    <div class="alert-message">${alert.reason}</div>
+                                    <div class="alert-timestamp">${alert.time.toLocaleTimeString()}</div>
+                                </div>
+                            </div>
+                        `;
+                        li.onclick = () => {
+                            // Fly to the marker on the globe
+                            const marker = countryMarkers.find(m => m.label === alert.name);
+                            if (marker && window.map3D) {
+                                window.map3D.flyCameraTo({
+                                    endCamera: {
+                                        center: marker.position,
+                                        tilt: 65,
+                                        range: 1200,
+                                        heading: 0,
+                                    },
+                                    durationMillis: 2000,
+                                });
+                            }
+                        };
+                        alertList.appendChild(li);
+                    });
+                }
+            }
+            noAlerts.style.display = hasAlerts ? 'none' : '';
+        }
+
+        // Simulate a random event escalation
+        function makeRandomMove() {
+            // Pick a random country to escalate
+            const idx = Math.floor(Math.random() * countryLocations.length);
+            const country = countryLocations[idx];
+            const events = [
+                "Escalation reported",
+                "New sanctions imposed",
+                "Major protest",
+                "Ceasefire broken",
+                "Aid required",
+                "Cyber attack detected",
+                "Military exercise",
+                "Diplomatic incident"
+            ];
+            const reason = events[Math.floor(Math.random() * events.length)];
+            urgentLocations.unshift({
+                name: country.name,
+                reason: reason,
+                severity: country.severity,
+                side: country.side,
+                time: new Date()
+            });
+            // Limit to 8 urgent alerts
+            urgentLocations = urgentLocations.slice(0, 8);
+            updateAlerts();
+        }
+
+        // Reset the alerts
+        function resetGame() {
+            urgentLocations = countryLocations
+                .filter(c => c.severity === "Critical" || c.severity === "High")
+                .map(c => ({
+                    name: c.name,
+                    reason: c.event,
+                    severity: c.severity,
+                    side: c.side,
+                    time: new Date()
+                }));
+            updateAlerts();
+        }
+
+        // Initialize immediately since content is loaded dynamically
+        init();
+        document.getElementById('move-btn').onclick = makeRandomMove;
+        document.getElementById('reset-btn').onclick = resetGame;
+    </script>
+</body>
+</html>
