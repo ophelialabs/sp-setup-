@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the top 100 global universities and research facilities ranked by R&D excellence. Filter by departments: Aerospace Engineering, BioMedical Engineering, BioTechnology, Chemistry, Engineering, Geospatial Analytics, Mathematics, Nanolithography, Nuclear Engineering, Physics, and Textiles.">
+    <meta name="keywords" content="top 100 universities, research facilities, CERN, aerospace engineering, biomedical engineering, biotechnology, chemistry, engineering, physics, nanolithography, nuclear engineering, mathematics, geospatial analytics, textiles, R&D departments, research institutions"">
+    <meta name="author" content="Top 100 Universities Guide">
+    <meta property="og:title" content="Top 100 Universities Worldwide - Ranked by Academic Excellence">
+    <meta property="og:description" content="Comprehensive ranking of the top 100 universities globally with direct links to official websites. Explore research, teaching, and innovation leaders.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <title>Top 100 Universities Worldwide - Ranked by Academic Excellence & Global Impact</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container-main {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .filter-section {
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .filter-section input {
+            max-width: 600px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .filter-section input:focus {
+            outline: none;
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+            transform: scale(1.02);
+        }
+
+        .filter-section input::placeholder {
+            color: #aaa;
+        }
+
+        .ranking-group {
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .ranking-group-title {
+            background: white;
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ranking-group-title i {
+            font-size: 2rem;
+        }
+
+        .universities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .university-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            border-left: 5px solid #667eea;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .university-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            border-left-color: #764ba2;
+        }
+
+        a.university-card {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .university-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .rank-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .rank-badge.top-10 {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+        }
+
+        .rank-badge.top-25 {
+            background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 100%);
+            box-shadow: 0 2px 8px rgba(192, 192, 192, 0.4);
+        }
+
+        .university-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .country {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .excellence-metrics {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .metric-tag {
+            background: #f0f0f0;
+            color: #555;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            font-size: 1.2rem;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-out 0.1s both;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .sort-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sort-section button {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sort-section button:hover,
+        .sort-section button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .department-filter-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .department-filter-title {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .department-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dept-btn {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dept-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .dept-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .dept-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-main">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="bi bi-mortarboard-fill"></i> Top 100 Universities Worldwide</h1>
+            <p>Ranked by Academic Excellence & Global Impact</p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">100</div>
+                <div class="stat-label">Universities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">40+</div>
+                <div class="stat-label">Countries</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Years Combined Excellence</div>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by university name or country...">
+        </div>
+
+        <!-- Sort Section -->
+        <div class="sort-section">
+            <button class="sort-btn active" data-sort="rank">By Rank</button>
+            <button class="sort-btn" data-sort="name">By Name</button>
+            <button class="sort-btn" data-sort="country">By Country</button>
+        </div>
+
+        <!-- Department Filter Section -->
+        <div class="department-filter-section">
+            <div class="department-filter-title">Filter by R&D Department:</div>
+            <div class="department-buttons">
+                <button class="dept-btn active" data-department="all">All Departments</button>
+                <button class="dept-btn" data-department="aerospace">Aerospace Engineering</button>
+                <button class="dept-btn" data-department="biomedical">BioMedical Engineering</button>
+                <button class="dept-btn" data-department="biotech">BioTechnology</button>
+                <button class="dept-btn" data-department="chemistry">Chemistry</button>
+                <button class="dept-btn" data-department="engineering">Engineering</button>
+                <button class="dept-btn" data-department="geospatial">Geospatial Analytics</button>
+                <button class="dept-btn" data-department="mathematics">Mathematics</button>
+                <button class="dept-btn" data-department="nanolith">Nanolithography</button>
+                <button class="dept-btn" data-department="nuclear">Nuclear Engineering</button>
+                <button class="dept-btn" data-department="physics">Physics</button>
+                <button class="dept-btn" data-department="textiles">Textiles</button>
+            </div>
+        </div>
+
+        <!-- Universities List -->
+        <div id="universitiesList">
+            <!-- Universities will be populated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Complete list of top 100 universities and research facilities ranked by R&D excellence
+        const universities = [
+            { rank: 1, name: 'Harvard University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.harvard.edu', keywords: 'Harvard University research', departments: ['biomedical', 'chemistry', 'physics', 'mathematics'] },
+            { rank: 2, name: 'Stanford University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.stanford.edu', keywords: 'Stanford research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 3, name: 'MIT', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.mit.edu', keywords: 'MIT research', departments: ['aerospace', 'engineering', 'nanolith', 'nuclear', 'physics'] },
+            { rank: 4, name: 'University of Oxford', country: 'United Kingdom', flag: '🇬🇧', type: 'University', website: 'https://www.ox.ac.uk', keywords: 'Oxford research', departments: ['chemistry', 'engineering', 'mathematics', 'physics'] },
+            { rank: 5, name: 'University of Cambridge', country: 'United Kingdom', flag: '🇬🇧', type: 'University', website: 'https://www.cam.ac.uk', keywords: 'Cambridge research', departments: ['biomedical', 'chemistry', 'mathematics', 'physics'] },
+            { rank: 6, name: 'Caltech', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.caltech.edu', keywords: 'Caltech research', departments: ['aerospace', 'chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 7, name: 'University of Chicago', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.uchicago.edu', keywords: 'Chicago research', departments: ['chemistry', 'mathematics', 'nuclear', 'physics'] },
+            { rank: 8, name: 'Imperial College London', country: 'United Kingdom', flag: '🇬🇧', type: 'University', website: 'https://www.imperial.ac.uk', keywords: 'Imperial College research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 9, name: 'UC Berkeley', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.berkeley.edu', keywords: 'Berkeley research', departments: ['aerospace', 'biomedical', 'chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 10, name: 'Yale University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.yale.edu', keywords: 'Yale research', departments: ['biomedical', 'chemistry', 'physics'] },
+            { rank: 11, name: 'CERN', country: 'Switzerland', flag: '🇨🇭', type: 'Research Facility', website: 'https://www.cern.ch', keywords: 'CERN physics research', departments: ['nuclear', 'physics', 'mathematics', 'engineering'] },
+            { rank: 12, name: 'Columbia University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.columbia.edu', keywords: 'Columbia research', departments: ['biomedical', 'chemistry', 'engineering', 'physics'] },
+            { rank: 13, name: 'Princeton University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.princeton.edu', keywords: 'Princeton research', departments: ['aerospace', 'engineering', 'mathematics', 'physics'] },
+            { rank: 14, name: 'ETH Zurich', country: 'Switzerland', flag: '🇨🇭', type: 'University', website: 'https://www.ethz.ch', keywords: 'ETH Zurich research', departments: ['aerospace', 'chemistry', 'engineering', 'nanolith', 'physics'] },
+            { rank: 15, name: 'Johns Hopkins University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.jhu.edu', keywords: 'Johns Hopkins research', departments: ['biomedical', 'chemistry', 'engineering'] },
+            { rank: 16, name: 'Duke University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.duke.edu', keywords: 'Duke research', departments: ['biomedical', 'chemistry', 'engineering'] },
+            { rank: 17, name: 'Argonne National Laboratory', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.anl.gov', keywords: 'Argonne National Laboratory research', departments: ['chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 18, name: 'Los Alamos National Laboratory', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.lanl.gov', keywords: 'Los Alamos research', departments: ['aerospace', 'chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 19, name: 'Lawrence Berkeley National Lab', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.lbl.gov', keywords: 'Lawrence Berkeley research', departments: ['chemistry', 'engineering', 'nanolith', 'nuclear', 'physics'] },
+            { rank: 20, name: 'University of Tokyo', country: 'Japan', flag: '🇯🇵', type: 'University', website: 'https://www.u-tokyo.ac.jp', keywords: 'Tokyo research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith', 'physics'] },
+            { rank: 21, name: 'Tsinghua University', country: 'China', flag: '🇨🇳', type: 'University', website: 'https://www.tsinghua.edu.cn', keywords: 'Tsinghua research', departments: ['aerospace', 'biotech', 'chemistry', 'engineering', 'nanolith'] },
+            { rank: 22, name: 'Peking University', country: 'China', flag: '🇨🇳', type: 'University', website: 'https://www.pku.edu.cn', keywords: 'Peking research', departments: ['biotech', 'chemistry', 'mathematics', 'physics'] },
+            { rank: 23, name: 'University of Melbourne', country: 'Australia', flag: '🇦🇺', type: 'University', website: 'https://www.unimelb.edu.au', keywords: 'Melbourne research', departments: ['biomedical', 'chemistry', 'engineering', 'physics'] },
+            { rank: 24, name: 'National University of Singapore', country: 'Singapore', flag: '🇸🇬', type: 'University', website: 'https://www.nus.edu.sg', keywords: 'NUS research', departments: ['biomedical', 'engineering', 'nanolith', 'physics'] },
+            { rank: 25, name: 'Northwestern University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.northwestern.edu', keywords: 'Northwestern research', departments: ['chemistry', 'engineering', 'nanolith', 'textiles'] },
+            { rank: 26, name: 'EMBL (European Molecular Biology Lab)', country: 'Germany', flag: '🇩🇪', type: 'Research Facility', website: 'https://www.embl.org', keywords: 'EMBL biomedical research', departments: ['biomedical', 'biotech', 'chemistry'] },
+            { rank: 27, name: 'University of California, San Diego', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.ucsd.edu', keywords: 'UC San Diego research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith'] },
+            { rank: 28, name: 'University of Washington', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.washington.edu', keywords: 'UW research', departments: ['biomedical', 'engineering', 'physics'] },
+            { rank: 29, name: 'University of Pennsylvania', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.upenn.edu', keywords: 'Penn research', departments: ['biomedical', 'chemistry', 'engineering'] },
+            { rank: 30, name: 'Cornell University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.cornell.edu', keywords: 'Cornell research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith', 'physics'] },
+            { rank: 31, name: 'National Institutes of Health (NIH)', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.nih.gov', keywords: 'NIH biomedical research', departments: ['biomedical', 'biotech', 'chemistry'] },
+            { rank: 32, name: 'Georgia Institute of Technology', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.gatech.edu', keywords: 'Georgia Tech research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith', 'textiles'] },
+            { rank: 33, name: 'University of Michigan', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.umich.edu', keywords: 'Michigan research', departments: ['aerospace', 'biomedical', 'engineering', 'physics'] },
+            { rank: 34, name: 'Rice University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.rice.edu', keywords: 'Rice research', departments: ['chemistry', 'engineering', 'nanolith', 'physics'] },
+            { rank: 35, name: 'University of Illinois Urbana-Champaign', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.illinois.edu', keywords: 'UIUC research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 36, name: 'Purdue University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.purdue.edu', keywords: 'Purdue research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith'] },
+            { rank: 37, name: 'Kyoto University', country: 'Japan', flag: '🇯🇵', type: 'University', website: 'https://www.kyoto-u.ac.jp', keywords: 'Kyoto research', departments: ['chemistry', 'engineering', 'physics'] },
+            { rank: 38, name: 'University of Toronto', country: 'Canada', flag: '🇨🇦', type: 'University', website: 'https://www.utoronto.ca', keywords: 'Toronto research', departments: ['aerospace', 'biomedical', 'engineering', 'physics'] },
+            { rank: 39, name: 'ETH Domain Research Institutes', country: 'Switzerland', flag: '🇨🇭', type: 'Research Facility', website: 'https://www.eth-domain.ch', keywords: 'ETH research', departments: ['aerospace', 'chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 40, name: 'University of Texas at Austin', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.utexas.edu', keywords: 'UT Austin research', departments: ['aerospace', 'engineering', 'geospatial', 'physics'] },
+            { rank: 41, name: 'Seoul National University', country: 'South Korea', flag: '🇰🇷', type: 'University', website: 'https://www.snu.ac.kr', keywords: 'Seoul National research', departments: ['biomedical', 'chemistry', 'engineering', 'nanolith'] },
+            { rank: 42, name: 'KAIST', country: 'South Korea', flag: '🇰🇷', type: 'University', website: 'https://www.kaist.ac.kr', keywords: 'KAIST research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 43, name: 'University of Tokyo Institute of Space and Astronautical Science', country: 'Japan', flag: '🇯🇵', type: 'Research Facility', website: 'https://www.isas.jaxa.jp', keywords: 'ISAS aerospace research', departments: ['aerospace', 'physics'] },
+            { rank: 44, name: 'Max Planck Institute for Physics', country: 'Germany', flag: '🇩🇪', type: 'Research Facility', website: 'https://www.mpp.mpg.de', keywords: 'Max Planck physics research', departments: ['physics', 'nuclear', 'mathematics'] },
+            { rank: 45, name: 'University of British Columbia', country: 'Canada', flag: '🇨🇦', type: 'University', website: 'https://www.ubc.ca', keywords: 'UBC research', departments: ['biomedical', 'engineering', 'physics'] },
+            { rank: 46, name: 'Ohio State University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.osu.edu', keywords: 'Ohio State research', departments: ['aerospace', 'chemistry', 'engineering', 'physics'] },
+            { rank: 47, name: 'University of Wisconsin-Madison', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.wisc.edu', keywords: 'Wisconsin research', departments: ['biomedical', 'chemistry', 'engineering', 'physics'] },
+            { rank: 48, name: 'National Center for Atmospheric Research (NCAR)', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://ncar.ucar.edu', keywords: 'NCAR geospatial research', departments: ['geospatial', 'physics', 'mathematics'] },
+            { rank: 49, name: 'Carnegie Mellon University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.cmu.edu', keywords: 'Carnegie Mellon research', departments: ['aerospace', 'engineering', 'mathematics', 'physics'] },
+            { rank: 50, name: 'University of Cambridge Institute of Astronomy', country: 'United Kingdom', flag: '🇬🇧', type: 'Research Facility', website: 'https://www.ast.cam.ac.uk', keywords: 'Cambridge astronomy research', departments: ['physics', 'mathematics'] },
+            { rank: 51, name: 'Boston University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.bu.edu', keywords: 'Boston University research', departments: ['biomedical', 'engineering', 'physics'] },
+            { rank: 52, name: 'University of Pennsylvania School of Engineering', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.seas.upenn.edu', keywords: 'Penn engineering research', departments: ['aerospace', 'biomedical', 'nanolith'] },
+            { rank: 53, name: 'Karolinska Institute', country: 'Sweden', flag: '🇸🇪', type: 'University', website: 'https://www.ki.se', keywords: 'Karolinska biomedical research', departments: ['biomedical', 'biotech', 'chemistry'] },
+            { rank: 54, name: 'Ludwig Maximilians University Munich', country: 'Germany', flag: '🇩🇪', type: 'University', website: 'https://www.lmu.de', keywords: 'Munich research', departments: ['chemistry', 'mathematics', 'physics'] },
+            { rank: 55, name: 'University of Sydney', country: 'Australia', flag: '🇦🇺', type: 'University', website: 'https://www.sydney.edu.au', keywords: 'Sydney research', departments: ['biomedical', 'chemistry', 'engineering'] },
+            { rank: 56, name: 'National Aeronautics and Space Administration (NASA)', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.nasa.gov', keywords: 'NASA aerospace research', departments: ['aerospace', 'geospatial', 'physics', 'engineering'] },
+            { rank: 57, name: 'University of New South Wales', country: 'Australia', flag: '🇦🇺', type: 'University', website: 'https://www.unsw.edu.au', keywords: 'UNSW research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith'] },
+            { rank: 58, name: 'University of Manchester', country: 'United Kingdom', flag: '🇬🇧', type: 'University', website: 'https://www.manchester.ac.uk', keywords: 'Manchester research', departments: ['aerospace', 'engineering', 'physics'] },
+            { rank: 59, name: 'University of Southern California', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.usc.edu', keywords: 'USC research', departments: ['aerospace', 'biomedical', 'engineering'] },
+            { rank: 60, name: 'Chinese Academy of Sciences (CAS)', country: 'China', flag: '🇨🇳', type: 'Research Facility', website: 'https://www.cas.cn', keywords: 'CAS research', departments: ['chemistry', 'engineering', 'nanolith', 'physics'] },
+            { rank: 61, name: 'University of Hong Kong', country: 'Hong Kong', flag: '🇭🇰', type: 'University', website: 'https://www.hku.hk', keywords: 'HKU research', departments: ['biomedical', 'chemistry', 'engineering'] },
+            { rank: 62, name: 'Technical University of Munich', country: 'Germany', flag: '🇩🇪', type: 'University', website: 'https://www.tum.de', keywords: 'TUM research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 63, name: 'University of Tokyo Engineering', country: 'Japan', flag: '🇯🇵', type: 'University', website: 'https://www.t.u-tokyo.ac.jp', keywords: 'Tokyo engineering research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith'] },
+            { rank: 64, name: 'National University of Singapore Engineering', country: 'Singapore', flag: '🇸🇬', type: 'University', website: 'https://cde.nus.edu.sg', keywords: 'NUS engineering research', departments: ['aerospace', 'biomedical', 'engineering', 'nanolith'] },
+            { rank: 65, name: 'Bell Labs (Nokia Bell Labs)', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.bell-labs.com', keywords: 'Bell Labs research', departments: ['engineering', 'nanolith', 'physics'] },
+            { rank: 66, name: 'University of Cambridge Department of Chemistry', country: 'United Kingdom', flag: '🇬🇧', type: 'University', website: 'https://www.ch.cam.ac.uk', keywords: 'Cambridge chemistry research', departments: ['chemistry', 'nanolith', 'physics'] },
+            { rank: 67, name: 'Delft University of Technology', country: 'Netherlands', flag: '🇳🇱', type: 'University', website: 'https://www.tudelft.nl', keywords: 'Delft research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 68, name: 'Brookhaven National Laboratory', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.bnl.gov', keywords: 'Brookhaven research', departments: ['chemistry', 'nanolith', 'nuclear', 'physics'] },
+            { rank: 69, name: 'University of Tokyo Institute of Industrial Science', country: 'Japan', flag: '🇯🇵', type: 'Research Facility', website: 'https://www.iis.u-tokyo.ac.jp', keywords: 'IIS research', departments: ['aerospace', 'engineering', 'nanolith'] },
+            { rank: 70, name: 'KTH Royal Institute of Technology', country: 'Sweden', flag: '🇸🇪', type: 'University', website: 'https://www.kth.se', keywords: 'KTH research', departments: ['aerospace', 'engineering', 'textiles'] },
+            { rank: 71, name: 'Emory University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.emory.edu', keywords: 'Emory research', departments: ['biomedical', 'biotech', 'chemistry'] },
+            { rank: 72, name: 'North Carolina State University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.ncsu.edu', keywords: 'NC State research', departments: ['engineering', 'nanolith', 'textiles'] },
+            { rank: 73, name: 'Oak Ridge National Laboratory', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.ornl.gov', keywords: 'Oak Ridge research', departments: ['chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 74, name: 'University of Göttingen', country: 'Germany', flag: '🇩🇪', type: 'University', website: 'https://www.uni-goettingen.de', keywords: 'Göttingen research', departments: ['chemistry', 'mathematics', 'physics'] },
+            { rank: 75, name: 'University of Tokyo Research Center for Advanced Science and Technology', country: 'Japan', flag: '🇯🇵', type: 'Research Facility', website: 'https://www.rcast.u-tokyo.ac.jp', keywords: 'RCAST research', departments: ['nanolith', 'physics', 'engineering'] },
+            { rank: 76, name: 'Tokyo Institute of Technology', country: 'Japan', flag: '🇯🇵', type: 'University', website: 'https://www.titech.ac.jp', keywords: 'Tokyo Tech research', departments: ['aerospace', 'engineering', 'nanolith', 'physics'] },
+            { rank: 77, name: 'Nanyang Technological University', country: 'Singapore', flag: '🇸🇬', type: 'University', website: 'https://www.ntu.edu.sg', keywords: 'NTU research', departments: ['biomedical', 'engineering', 'nanolith'] },
+            { rank: 78, name: 'University of Stuttgart', country: 'Germany', flag: '🇩🇪', type: 'University', website: 'https://www.uni-stuttgart.de', keywords: 'Stuttgart research', departments: ['aerospace', 'engineering', 'nanolith'] },
+            { rank: 79, name: 'Jefferson Lab (Thomas Jefferson National Accelerator Facility)', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.jlab.org', keywords: 'Jefferson Lab physics research', departments: ['nuclear', 'physics', 'engineering'] },
+            { rank: 80, name: 'University of Science and Technology of China', country: 'China', flag: '🇨🇳', type: 'University', website: 'https://www.ustc.edu.cn', keywords: 'USTC research', departments: ['chemistry', 'mathematics', 'nanolith', 'physics'] },
+            { rank: 81, name: 'Politecnico di Milano', country: 'Italy', flag: '🇮🇹', type: 'University', website: 'https://www.polimi.it', keywords: 'Politecnico research', departments: ['aerospace', 'engineering', 'nanolith'] },
+            { rank: 82, name: 'University of Tokyo Graduate School of Engineering', country: 'Japan', flag: '🇯🇵', type: 'University', website: 'https://www.t.u-tokyo.ac.jp/en', keywords: 'Tokyo engineering graduate research', departments: ['aerospace', 'biomedical', 'engineering'] },
+            { rank: 83, name: 'Ecole Polytechnique Paris', country: 'France', flag: '🇫🇷', type: 'University', website: 'https://www.polytechnique.edu', keywords: 'Ecole Polytechnique research', departments: ['aerospace', 'engineering', 'mathematics', 'physics'] },
+            { rank: 84, name: 'PSI - Paul Scherrer Institut', country: 'Switzerland', flag: '🇨🇭', type: 'Research Facility', website: 'https://www.psi.ch', keywords: 'PSI research', departments: ['chemistry', 'engineering', 'nuclear', 'physics'] },
+            { rank: 85, name: 'Hiroshima University', country: 'Japan', flag: '🇯🇵', type: 'University', website: 'https://www.hiroshima-u.ac.jp', keywords: 'Hiroshima research', departments: ['chemistry', 'engineering', 'physics'] },
+            { rank: 86, name: 'Fermi National Accelerator Laboratory', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.fnal.gov', keywords: 'Fermilab physics research', departments: ['nuclear', 'physics', 'engineering'] },
+            { rank: 87, name: 'North Carolina State Textile Engineering', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://textiles.ncsu.edu', keywords: 'textile engineering research', departments: ['engineering', 'textiles', 'chemistry'] },
+            { rank: 88, name: 'Hong Kong University of Science and Technology', country: 'Hong Kong', flag: '🇭🇰', type: 'University', website: 'https://www.hkust.edu.hk', keywords: 'HKUST research', departments: ['biomedical', 'engineering', 'nanolith', 'physics'] },
+            { rank: 89, name: 'University of Melbourne Institute of Neuroscience', country: 'Australia', flag: '🇦🇺', type: 'Research Facility', website: 'https://www.ion.unimelb.edu.au', keywords: 'Melbourne neuroscience research', departments: ['biomedical', 'chemistry', 'physics'] },
+            { rank: 90, name: 'University of Tokyo Center for Spatial Information Science', country: 'Japan', flag: '🇯🇵', type: 'Research Facility', website: 'https://www.csis.u-tokyo.ac.jp', keywords: 'geospatial research Tokyo', departments: ['geospatial', 'mathematics', 'physics'] },
+            { rank: 91, name: 'University of Texas Institute for Geophysics', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.ig.utexas.edu', keywords: 'geophysics geospatial research', departments: ['geospatial', 'engineering', 'physics'] },
+            { rank: 92, name: 'Swedish University of Agricultural Sciences', country: 'Sweden', flag: '🇸🇪', type: 'University', website: 'https://www.slu.se', keywords: 'SLU research', departments: ['biotech', 'chemistry', 'textiles'] },
+            { rank: 93, name: 'University of Massachusetts Lowell', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.uml.edu', keywords: 'UMass Lowell research', departments: ['aerospace', 'engineering', 'nanolith', 'textiles'] },
+            { rank: 94, name: 'Clemson University', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.clemson.edu', keywords: 'Clemson research', departments: ['aerospace', 'biomedical', 'engineering', 'textiles'] },
+            { rank: 95, name: 'Shanghai Jiao Tong University', country: 'China', flag: '🇨🇳', type: 'University', website: 'https://www.sjtu.edu.cn', keywords: 'SJTU research', departments: ['aerospace', 'engineering', 'nanolith'] },
+            { rank: 96, name: 'MIT Media Lab', country: 'United States', flag: '🇺🇸', type: 'Research Facility', website: 'https://www.media.mit.edu', keywords: 'MIT Media Lab research', departments: ['engineering', 'nanolith', 'physics'] },
+            { rank: 97, name: 'University of Tokyo Institute of Medical Science', country: 'Japan', flag: '🇯🇵', type: 'Research Facility', website: 'https://www.ims.u-tokyo.ac.jp', keywords: 'biomedical research Tokyo', departments: ['biomedical', 'biotech', 'chemistry'] },
+            { rank: 98, name: 'University of Connecticut Polymer Textile', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://www.uconn.edu', keywords: 'textile polymer research', departments: ['chemistry', 'engineering', 'textiles'] },
+            { rank: 99, name: 'National Center for Isotope and Environmental Research', country: 'France', flag: '🇫🇷', type: 'Research Facility', website: 'https://www.insu.cnrs.fr', keywords: 'isotope environmental research', departments: ['chemistry', 'geospatial', 'physics'] },
+            { rank: 100, name: 'University of Illinois Chemistry Department', country: 'United States', flag: '🇺🇸', type: 'University', website: 'https://chemistry.illinois.edu', keywords: 'chemistry research', departments: ['chemistry', 'mathematics', 'nanolith'] },
+        ];
+
+        let currentSort = 'rank';
+        let searchTerm = '';
+        let selectedDepartment = 'all';
+
+        function renderUniversities() {
+            const container = document.getElementById('universitiesList');
+            let filteredUniversities = universities.filter(uni => {
+                const searchLower = searchTerm.toLowerCase();
+                const matchesSearch = uni.name.toLowerCase().includes(searchLower) || uni.country.toLowerCase().includes(searchLower);
+                const matchesDept = selectedDepartment === 'all' || (uni.departments && uni.departments.includes(selectedDepartment));
+                return matchesSearch && matchesDept;
+            });
+
+            // Sort universities
+            if (currentSort === 'name') {
+                filteredUniversities.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (currentSort === 'country') {
+                filteredUniversities.sort((a, b) => a.country.localeCompare(b.country));
+            }
+            // 'rank' is default and already sorted
+
+            if (filteredUniversities.length === 0) {
+                container.innerHTML = '<div class="no-results">No institutions found matching your filters. Try a different search or department.</div>';
+                return;
+            }
+
+            // Group by ranking sections
+            const sections = {
+                'top10': { title: '🏆 Top 10 Research Institutions', unis: [] },
+                'top25': { title: '⭐ Ranks 11-25', unis: [] },
+                'top50': { title: '🎓 Ranks 26-50', unis: [] },
+                'top75': { title: '📚 Ranks 51-75', unis: [] },
+                'top100': { title: '🌟 Ranks 76-100', unis: [] }
+            };
+
+            filteredUniversities.forEach(uni => {
+                if (uni.rank <= 10) sections.top10.unis.push(uni);
+                else if (uni.rank <= 25) sections.top25.unis.push(uni);
+                else if (uni.rank <= 50) sections.top50.unis.push(uni);
+                else if (uni.rank <= 75) sections.top75.unis.push(uni);
+                else sections.top100.unis.push(uni);
+            });
+
+            let html = '';
+            Object.values(sections).forEach(section => {
+                if (section.unis.length > 0) {
+                    html += `<div class="ranking-group">
+                        <div class="ranking-group-title">${section.title}</div>
+                        <div class="universities-grid">`;
+                    
+                    section.unis.forEach(uni => {
+                        const badgeClass = uni.rank <= 10 ? 'top-10' : uni.rank <= 25 ? 'top-25' : '';
+                        const deptLabels = uni.departments ? uni.departments.map(d => {
+                            const deptMap = {
+                                'aerospace': 'Aerospace',
+                                'biomedical': 'BioMedical',
+                                'biotech': 'BioTech',
+                                'chemistry': 'Chemistry',
+                                'engineering': 'Engineering',
+                                'geospatial': 'Geospatial',
+                                'mathematics': 'Math',
+                                'nanolith': 'Nanolith',
+                                'nuclear': 'Nuclear',
+                                'physics': 'Physics',
+                                'textiles': 'Textiles'
+                            };
+                            return deptMap[d] || d;
+                        }).join(', ') : '';
+                        
+                        html += `
+                            <a href="${uni.website}" class="university-card" target="_blank" rel="noopener noreferrer" title="${uni.keywords}">
+                                <div class="card-body">
+                                    <span class="rank-badge ${badgeClass}">#${uni.rank}</span>
+                                    <h5 class="university-name">${uni.name}</h5>
+                                    <p class="country">${uni.flag} ${uni.country}</p>
+                                    <p style="font-size: 0.85rem; color: #666; margin-top: 8px;"><strong>Type:</strong> ${uni.type}</p>
+                                    <div style="margin-top: 10px;">
+                                        ${uni.departments ? uni.departments.map(d => {
+                                            const deptMap = {
+                                                'aerospace': 'Aerospace Eng',
+                                                'biomedical': 'BioMedical',
+                                                'biotech': 'BioTech',
+                                                'chemistry': 'Chemistry',
+                                                'engineering': 'Engineering',
+                                                'geospatial': 'Geospatial',
+                                                'mathematics': 'Mathematics',
+                                                'nanolith': 'Nanolith',
+                                                'nuclear': 'Nuclear',
+                                                'physics': 'Physics',
+                                                'textiles': 'Textiles'
+                                            };
+                                            return `<span class="dept-badge">${deptMap[d] || d}</span>`;
+                                        }).join('') : ''}
+                                    </div>
+                                </div>
+                            </a>`;
+                    });
+                    
+                    html += `</div></div>`;
+                }
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('keyup', (e) => {
+            searchTerm = e.target.value;
+            renderUniversities();
+        });
+
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSort = btn.dataset.sort;
+                renderUniversities();
+            });
+        });
+
+        document.querySelectorAll('.dept-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.dept-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedDepartment = btn.dataset.department;
+                renderUniversities();
+            });
+        });
+
+        // Initial render
+        renderUniversities();
+    </script>
+
+</body>
+
+</html>

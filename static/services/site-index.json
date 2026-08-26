@@ -1,0 +1,56 @@
+{
+    "pages": [
+        {
+            "title": "Home",
+            "url": "index.html",
+            "content": "Welcome to Ophelia Labs - Cloud, AI, and Web Solutions"
+        },
+        {
+            "title": "About",
+            "url": "/about.html",
+            "content": "Learn more about Ophelia Labs, our mission, and our team.",
+            "snippet": "Discover the mission and team behind Ophelia Labs."
+        },
+        {
+            "title": "Enterprise Solutions",
+            "url": "nav/projects/enterprise.html",
+            "content": "Enterprise-level solutions for businesses"
+        },
+        {
+            "title": "Cloud Architecture",
+            "url": "nav/projects/cloud.html",
+            "content": "Cloud architecture and infrastructure solutions"
+        },
+        {
+            "title": "Security Implementation",
+            "url": "nav/projects/security.html",
+            "content": "Security implementation and best practices"
+        },
+        {
+            "title": "Portfolio",
+            "url": "/portfolio.html",
+            "content": "A showcase of projects, case studies, and technical achievements.",
+            "snippet": "Browse our portfolio of projects and technical case studies."
+        },
+        {
+            "title": "RSS-Atom",
+            "url": "nav/apps/rss-atom.html",
+            "content": "RSS and Atom feed applications"
+        },
+        {
+            "title": "Saturn",
+            "url": "nav/apps/saturn.html",
+            "content": "Saturn application details"
+        },
+        {
+            "title": "Neptune",
+            "url": "nav/apps/neptune.html",
+            "content": "Neptune application details"
+        },
+        {
+            "title": "Pluto",
+            "url": "nav/apps/pluto.html",
+            "content": "Pluto application details"
+        }
+    ]
+}

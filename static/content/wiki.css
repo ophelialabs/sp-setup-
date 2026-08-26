@@ -1,0 +1,132 @@
+/* Wiki-style Documentation CSS */
+.wiki-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wiki-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.wiki-content {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.wiki-content h2 {
+    margin-top: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
+    color: #2564cf;
+}
+
+.wiki-content h3 {
+    margin-top: 1.5rem;
+    color: #495057;
+}
+
+.wiki-content pre {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    overflow-x: auto;
+}
+
+.wiki-content code {
+    background: #f8f9fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.875em;
+    color: #2564cf;
+}
+
+.wiki-content blockquote {
+    border-left: 4px solid #2564cf;
+    margin: 1.5rem 0;
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    color: #495057;
+}
+
+.wiki-toc {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.wiki-toc ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.wiki-toc li {
+    margin: 0.5rem 0;
+}
+
+.wiki-toc a {
+    color: #495057;
+    text-decoration: none;
+}
+
+.wiki-toc a:hover {
+    color: #2564cf;
+}
+
+.wiki-breadcrumb {
+    padding: 0.5rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.wiki-sidebar .nav-link {
+    color: #495057;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.wiki-sidebar .nav-link:hover {
+    background: #f8f9fa;
+    color: #2564cf;
+}
+
+.wiki-sidebar .nav-link.active {
+    background: #e9ecef;
+    color: #2564cf;
+    font-weight: 500;
+}
+
+.wiki-tags {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.wiki-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    margin: 0.25rem;
+    background: #e9ecef;
+    border-radius: 16px;
+    color: #495057;
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+.wiki-tag:hover {
+    background: #dee2e6;
+    color: #2564cf;
+}
+
+.edit-history {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}

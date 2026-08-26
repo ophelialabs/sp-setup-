@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Search | Ophelia Labs</title>
+    <meta name="description" content="Search Ophelia Labs for cloud, AI, and web solutions, projects, and resources.">
+    <meta name="keywords" content="Search, Ophelia Labs, Cloud, AI, Web, Projects, Resources, Technology">
+    <meta name="author" content="Ophelia Labs">
+    <link rel="canonical" href="https://ophelialabs.com/main/search.html">
+    <meta property="og:title" content="Search | Ophelia Labs">
+    <meta property="og:description" content="Search Ophelia Labs for cloud, AI, and web solutions, projects, and resources.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ophelialabs.com/main/search.html">
+    <meta property="og:site_name" content="Ophelia Labs">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="static/content/site.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main class="container mt-5 pt-5">
+        <h1 class="category-header text-center mb-4">Search Results</h1>
+        <div id="search-results"></div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/scripts/site.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            
+            if (query) {
+                fetch('static/scripts/site-index.json')
+                    .then(res => res.json())
+                    .then(data => {
+                        const results = data.pages.filter(page =>
+                            page.title.toLowerCase().includes(query.toLowerCase()) ||
+                            page.content.toLowerCase().includes(query.toLowerCase())
+                        );
+                        
+                        const resultsContainer = document.getElementById('search-results');
+                        if (results.length === 0) {
+                            resultsContainer.innerHTML = '<p class="text-center">No results found for: ' + query + '</p>';
+                            return;
+                        }
+
+                        const resultsList = results.map(r => `
+                            <a href="${r.url}" class="list-group-item list-group-item-action">
+                                <h5 class="mb-1">${r.title}</h5>
+                                <p class="mb-1">${r.content}</p>
+                            </a>
+                        `).join('');
+                        
+                        resultsContainer.innerHTML = resultsList;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching search results:', error);
+                        document.getElementById('search-results').innerHTML = 
+                            '<p class="text-center text-danger">Error loading search results</p>';
+                    });
+            } else {
+                document.getElementById('search-results').innerHTML = 
+                    '<p class="text-center">Please enter a search term</p>';
+            }
+        });
+    </script>
+</body>
+</html>
